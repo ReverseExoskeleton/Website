@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+This is an example weekly progress report document that team members can use to report their individual progress 
+of their ECE477 senior design projects. Weekly progress reports are expected to follow the general guidelines
+presented in the "Progress Report Policy" document, available online at https://engineering.purdue.edu/ece477/Course/Policies/policies.html
+
+Please create 4 copies of this example, renaming each copy to <PurdueID>.html, where <PurdueID> corresponds to
+the Purdue ITAP Career Account ID given by Purdue to each individual team member. If you have any questions,
+contact course staff.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!--Reconfigurable base tag; used to modify the site root location for root-relative links-->
+<base href="https://engineering.purdue.edu/477grp6/" />
+
+<!--Content-->
+<title>ECE477 Course Documents</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="George Hadley">
+<meta name = "format-detection" content = "telephone=no" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/default.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/content.css">
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+</head>
+<body>
+<div id="wrapper_site">
+    <div id="wrapper_page">
+	<!-- Instantiate global site header.-->
+	<div id="header"></div>
+		<!-- Instantiate site global navigation bar.-->
+		<div id="menu"></div>
+	
+		<!-- Instantiate a page banner image. Page banner images should be 1100x350px and should be located within the local
+			img folder located at this directory level. -->
+		<div id="banner">
+			<img src="Files/img/BannerImgExample.jpg"></img>
+		</div>
+	
+		<!-- Instantiate "tools" needed for a page. Tools are premade functional blocks that can be used to build a page,
+			and include things such as a file lister (for listing out homework assignments or tutorials)
+		-->
+		<div id="content">
+			<h2>Progress Report for Zach Ghera</h2>
+			
+			<h4>Week 2 (8/30)</h4>
+			<p>
+				<b>Date:</b> 8/28<br>
+				<b>Total hours:</b> TBD<br>
+				<b>Description of design efforts:</b><br>
+				<ul>
+					<li>
+						Determined the hardware necessary for wireless communication.
+						<br>
+						The first step I took was researching BLE versus alternatives
+						such as RF (specifically ZigBee) to see which would be a more
+						viable for our project. More specifically, the choosen wireless
+						communication method needs to have:
+						<ul>
+							<li>Low power consumption and (ideally) 1.8V source voltage</li>
+							<li>Low latency</li>
+							<li>Low cost</li>
+						</ul>
+						In addition to looking at some of the most popular (available)
+						chips for both 
+						<a href="https://www.digikey.jp/products/en/rf-if-and-rfid/rf-transceiver-modules-and-modems/872?k=&pkeyword=xbee&sv=0&pv1883=320634&sf=0&FV=1989%7C0%2C-8%7C872&quantity=&ColumnSort=0&page=1&stock=1&pageSize=25">
+							BLE 
+						</a>
+						and 
+						<a href="https://www.digikey.jp/products/en/rf-if-and-rfid/rf-transceiver-modules-and-modems/872?FV=1989%7C0%2C-8%7C872%2C578%7C423589&quantity=0&ColumnSort=0&page=1&stock=1&pageSize=25&pkeyword=xbee">
+							RF/Zigbee
+						</a>
+						, one valuable source to help inform the decision was 
+						<a href="https://www.researchgate.net/publication/271327094_On_the_Potential_of_Bluetooth_Low_Energy_Technology_in_Vehicular_Applications">
+							this paper on the Potential of Bluetooth Low Energy
+							Technology in Vehicular Applications
+						</a>
+						. As summarized in the Comparison between BLE and ZigBee section,
+						BLE offers a faster data rate, lower latency, lower cost, and
+						more robust in the presence of strong WiFi interference.
+						Therefore, I recommended that we proceed with buying a BLE chip.
+						<br>
+						I then did some research to get a sense of what are some of the
+						most popular BLE controllers. 
+						<a href="https://developex.com/blog/most-popular-ble-controllers/">
+							This blog
+						</a>
+						was one of many websites that I referenced alongside filtering
+						through different bluetooth chips on the digikey website. After
+						some review of the available parts, I chose the 
+						<a href="https://www.digikey.jp/product-detail/en/jorjin-technologies-inc/ZB7412-00/2393-ZB7412-00CT-ND/12142962">
+						ZB7412 module 
+						</a>
+						based on the TI CC26xx BLE controller. The main primary rationale
+						behind this choice was that it had the second lowest current
+						consumption (behind the DA 14580 which had no available BLE modules).
+
+					</li>
+					<li>
+						Confirmed ability to disable IMU (
+						<a href="https://www.digikey.com/en/products/detail/bosch-sensortec/BHI160B/9674245?s=N4IgTCBcDaIBxjgWgIwAY4E5VIHIBEQBdAXyA">
+							BHI160B
+						</a>
+						) fusion core. 
+						<br>
+						After the team ordered a few IMUs, I found that this particular IMU
+						had an onboard "fusion core" that allows a client to read from
+						"virtual sensors." These sensors are available via on-chip sensor
+						fusion.
+						<br>
+						If we were not concerned about about keeping the wearable low-power,
+						it would be an obvious choice to use the IC sensor fusion result to
+						obtain arm orientation (angular displacement). However, this fusion
+						core is responsible for around 35% of the power consumption of the
+						module during "significant motion" (see Table 13 from BHI160B
+						datasheet attached below).
+						<br>
+						<img src="/web/Team/progress/zghera/bhi160b_table_13_power_consumption.jpg" style="width:50%;height:50%;">
+						<br>
+						Thus, the ability to disable the fusion core and perform this
+						computation on the host would save up to ~1 mA which would translate
+						to ~1.8mW. For reference, the analog event detector consumes 0.7mW.
+						<br>
+						Based on section 9.4 in the BHI160B datasheet, it appears you can
+						disable the fusion core so that it will only draw ~7uA.
+					</li>
+					<li>
+						Functional Specification
+						<br>
+						I completed the functional description, expected use case,
+						computational constraints, and functional block diagram sections
+						of the report.
+						<br>
+						Please see a picture of the RevEx functional block diagram I created below.
+						<br>
+						<img src="/web/Team/progress/zghera/revex-fbd.jpg" style="width:50%;height:50%;">
+					</li>
+					<li>
+						Sensor Fusion Research and Prototyping
+						<br>
+						...
+					</li>
+				</ul>
+			</p>
+			<br>
+		</div>
+	
+		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
+		<div id="footer"></div>
+    </div>
+</div>
+
+<!--JS-->
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#header").load("header.html");
+	$("#menu").load("navbar.html");
+	$("#footer").load("footer.html");
+});
+</script>
+</body>
+</html>

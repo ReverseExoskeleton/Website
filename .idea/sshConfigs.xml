@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="ecegrid.ecn.purdue.edu" id="d4f1e255-f83d-404d-9599-e2e9c5ef6e22" port="22" customName="477grp6" nameFormat="CUSTOM" username="unger12">
+        <option name="customName" value="477grp6" />
+      </sshConfig>
+      <sshConfig authType="PASSWORD" host="ecegrid.ecn.purdue.edu" id="80b38eed-f49b-4428-9cce-382217bb73f6" port="22" customName="477grp6" nameFormat="CUSTOM" username="unger12@purdue.edu">
+        <option name="customName" value="477grp6" />
+      </sshConfig>
+      <sshConfig authType="PASSWORD" host="ecegrid.ecn.purdue.edu" id="a2db07f8-54a4-451c-a126-3962483caf51" port="22" customName="477grp6" nameFormat="CUSTOM">
+        <option name="customName" value="477grp6" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>
