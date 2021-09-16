@@ -52,15 +52,212 @@ contact course staff.
 		-->
 		<div id="content">
 			<h2>Progress Report for Zach Ghera</h2>
-			
-			<h4>Week 2 (8/30)</h4>
+
+			<h4>Week 3</h4>
 			<p>
-				<b>Date:</b> 8/28<br>
-				<b>Total hours:</b> TBD<br>
+				<b>Date:</b> 9/10<br>
+				<b>Total hours:</b> ~12 hours<br>
 				<b>Description of design efforts:</b><br>
 				<ul>
 					<li>
-						Determined the hardware necessary for wireless communication.
+						<b>Sensor Fusion Research</b> 
+						<br>
+						This week I spent much of my time researching methods to estimate 
+						the users arm position from the following sensor/input sources:
+						<ul>
+							<li>Analog potentiometer voltage reading.</li>
+							<li>3-axis gyroscope reading.</li>
+							<li>3-axis accelerometer reading.</li>
+							<li>VR headset position.</li>
+							<li>(Configuration only) VR hand controller positions.</li>
+						</ul>
+						<br>
+						This problem contains three sub-problems:
+						<ol>
+							<li>Estimate the position of the forearm relative to the upper arm.</li>
+							<li>Estimate the position of the upper arm relative to the shoulder.</li>
+							<li>Estimate the position of the shoulder relative to the VR headset.</li>
+						</ol>
+						I will discuss the proposed solutions for each below:
+						<br>
+						<br>
+						Estimation #1 can be obtained using the position of the elbow (from
+						estimation #2) and the voltage reading from the potentiometer.
+						<br>
+						<br>
+						Skipping to #3, we can initially assume the shoulder position and
+						then correct this guess during a calibration phase where the user
+						is instructed to manuever the controllers in a specific way.
+						<br>
+						<br>
+						Estimation #2 is the least trivial as the shoulder joint has 3 degrees
+						of freedom. The challenge is to use the location of the shoulder
+						and the IMU (located on the users upper arm) to estimate the position
+						of the arm relative to the shoulder.
+						<br>
+						As mentioned above, our IMU does contain a sensor fusion core.
+						However, in an effort to keep the system as low power as possible,
+						the team decided to move the sensor fusion to the host computer.
+						Thus, the primary objective was to find a sensor fusion method
+						that has both high accuracy/robust and computationally inexpensive.
+						<br>
+						In my research so far, I have identified 2 alternative solutions:
+						<ol>
+							<li>
+								Estimate arm attitude relative to shoulder.
+								<br>
+ 								This would likely encompass fusing the gravitational
+								vector estimate using the accelerometer (with some trigonometry)
+								as well as the integrated rotational velocity from gyroscope.
+								Based on initial research, a Kalman or complementary filter are 
+								common choices for fusing this information. After researching the
+								differences between the filters (e.g. 
+								<a href="https://www.researchgate.net/publication/320726643_Comparison_of_Complementary_and_Kalman_Filter_Based_Data_Fusion_for_Attitude_Heading_Reference_System">
+									Comparison of Complementary and Kalman Filter Based Data Fusion for Attitude Heading Reference System
+								</a>
+								), the complementary filter is the choice for attitude estimation
+								in our application due to its simplicity, low computational cost,
+								and comparable (although consistently worse) performance
+								to the Kalman filter .
+								<br>
+								However, there are two issues with this approach.
+								<ol>
+									<li>
+										Correcting "yaw" drift.
+										<br>
+										Without a magnetometer, there is no easy way to correct
+										for estimated yaw angle as there is no gravity vector
+										component we can extract from the accelerometer in that
+										plane. The only counter to this point I found was in
+										<a href="https://ieeexplore.ieee.org/document/6385893">
+										this paper
+										</a>
+										. They suggest (section 3B) that we may be able to get
+										around this if we assume that we don't spend a lot of
+										time moving solely in this plane and then we can calculate
+										the drift once the joint axis is no longer in the yaw plane 
+										by "integrating the gyroscope readings and comparing
+										against the joint angle." But I am not sure of how well
+									  this applies for our use case.
+									</li>
+									<li>
+										Linear acceleration.
+										<br>
+										 In all the papers/docs I read (e.g. see end of section 2 in
+										 <a href="https://www.nxp.com/docs/en/application-note/AN3461.pdf"></a>
+										 this document
+										 ), they all ensure "smooth movements" or just flat out
+										 assume no linear acceleration. This is not true for us.
+										 And it makes sense why this is a problem. How would you
+										 know the difference between linear acceleration and a
+										 change in the gravitational vector components (unless
+										 the magnitude is greater than ~1g of course). In this case,
+										 we may not be able to reliably use the accelerometer to
+										 correct for gyroscope drift at all times.
+									</li>
+								</ol>
+							</li>
+							<li>
+								Estimate arm pose relative to shoulder.
+								<br>
+								While similar to the previous point, this involves estimating 
+								the absolute IMU position using the accelerometer and gyroscope.
+								The advantage here is reducing the need for a magnetometer and
+								being able to more robustly handle linear acceleration of the 
+								arm.
+								<br>
+								The main downside here is that we would need a more complex
+								fusion algorithm such as the
+								<a href="chrome-extension://cbnaodkpfinfiipjblikofhlhlcickei/src/pdfviewer/web/viewer.html?file=file:///C:/Users/zghera/Downloads/sensors-17-01257.pdf">
+								EKF
+								</a>
+								. As a result, I would need to
+								perform much more research on how to implement something like an
+								EKF properly for our use case.
+							</li>
+						</ol>
+						<br>
+						After analysis of the alternatives, I determined that implementing
+						and tuning our own sensor fusion algorithm would be time consuming 
+						and was unnecessary as the sensor fusion core on our IMU was able to
+						perform sensor fusion with a lower power cost associated.
+						<br>
+						<br>
+						However, after doing some research on compatable magnetometer with
+						the BHI160B, the only available magnetometers were very small 
+						(1.5 x 1.5 mm) BGA chips that would be impossible to solder with 
+						our current equipment.
+						<br>
+						However, I still believed that using an existing implementation to
+						the sensor fusion (whether that be in software or hardware) made
+						more sense for our project given the limited time and resources.
+						<br>
+						I helped search for a new IMU that had a built in magnetometer. We found the 
+						<a href="https://www.sparkfun.com/products/15335">
+						ICM-20948
+						</a>
+						It met all of our criteria (e.g. low power, >100 Hz update rate,
+						easy to solder, etc.). 
+						<br>
+						<br>
+						There were two options for sensor fusion with this IMU:
+						<ol>
+							<li>
+								A built in FPGA for digital motion processing (DMP). Swag found an 
+								<a href="https://github.com/ZaneL/Teensy-ICM-20948">
+								Arduino library on GitHub 
+								</a>
+								that uses the IMU company's (Invensense) firmware for interfacing with the 
+								DMP FPGA.
+							</li>
+							<li>
+								An open source 9DOF IMU sensor fusion implementation such as
+								<a href="https://x-io.co.uk/open-source-imu-and-ahrs-algorithms/">
+									x-io technologies IMU algorithms
+								</a>
+								.
+							</li>
+						</ol>
+						After some poking around in both of the code repositories and
+						doing some additonal research, I determined that the easiest path
+						would be option 2. According to
+						<a href="https://github.com/pimoroni/icm20948-python/issues/1#issuecomment-539730082">
+						this GitHub issue comment 
+						</a>
+						, it was a challenge to interface with Invensense's FPGA. For example,
+						you must register and get permission from Invensese to down load the
+						proprietary binary image before you can use the FPGA. Additionally, performing
+						the sensor fusion on host allows for easier modification and debugging.
+						<br>
+					</li>
+					<li>
+						<b>Software Overview</b> 
+						<br>
+						My other main task this week was to complete the software overview 
+						document. I worked with Isaac and to determine some details such as the
+						bluetooth communication and the microcontroller states. Outside of this 
+						collaboration, I was responsible for writing the software overview 
+						and working	through all the software design decisions encapsulated
+						in the document.
+						<br>
+						Please see a picture of the RevEx host computer flowchart I created below.
+						<br>
+						<img src="Team/progress/zghera/img/week3/revex-flowchart-host-computer.jpg" style="width:85%;height:85%;">
+					</li>
+				</ul>
+			</p>
+			
+			<h4>Week 2</h4>
+			<p>
+				<b>Date:</b> 9/3<br>
+				<b>Total hours:</b> ~8 hours<br>
+				<b>Description of design efforts:</b><br>
+				I spent the majority of this week doing research on the feasibility of
+				hardware/modules that we need for our system. Please see a summary of each
+				progress item below:
+				<ul>
+					<li>
+						<b>Determined the hardware necessary for wireless communication.</b>
 						<br>
 						The first step I took was researching BLE versus alternatives
 						such as RF (specifically ZigBee) to see which would be a more
@@ -107,11 +304,11 @@ contact course staff.
 
 					</li>
 					<li>
-						Confirmed ability to disable IMU (
+						<b>Confirmed ability to disable IMU (
 						<a href="https://www.digikey.com/en/products/detail/bosch-sensortec/BHI160B/9674245?s=N4IgTCBcDaIBxjgWgIwAY4E5VIHIBEQBdAXyA">
 							BHI160B
 						</a>
-						) fusion core. 
+						) fusion core.</b>
 						<br>
 						After the team ordered a few IMUs, I found that this particular IMU
 						had an onboard "fusion core" that allows a client to read from
@@ -125,7 +322,7 @@ contact course staff.
 						module during "significant motion" (see Table 13 from BHI160B
 						datasheet attached below).
 						<br>
-						<img src="/web/Team/progress/zghera/bhi160b_table_13_power_consumption.jpg" style="width:50%;height:50%;">
+						<img src="Team/progress/zghera/img/week2/bhi160b_table_13_power_consumption.jpg" style="width:40%;height:40%;">
 						<br>
 						Thus, the ability to disable the fusion core and perform this
 						computation on the host would save up to ~1 mA which would translate
@@ -135,7 +332,7 @@ contact course staff.
 						disable the fusion core so that it will only draw ~7uA.
 					</li>
 					<li>
-						Functional Specification
+						<b>Functional Specification</b> 
 						<br>
 						I completed the functional description, expected use case,
 						computational constraints, and functional block diagram sections
@@ -143,12 +340,7 @@ contact course staff.
 						<br>
 						Please see a picture of the RevEx functional block diagram I created below.
 						<br>
-						<img src="/web/Team/progress/zghera/revex-fbd.jpg" style="width:50%;height:50%;">
-					</li>
-					<li>
-						Sensor Fusion Research and Prototyping
-						<br>
-						...
+						<img src="Team/progress/zghera/img/week2/revex-fbd.jpg" style="width:75%;height:75%;">
 					</li>
 				</ul>
 			</p>

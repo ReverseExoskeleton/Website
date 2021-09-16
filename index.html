@@ -50,15 +50,28 @@ This website was based upon a number of source materials, which are elaborated u
 		<div id="slideshow"></div>
 		<!-- Instantiate main page content. All page content should be added to about.html -->
 		<div id="content">
-            <h2>Project Overview:</h2> This is the place to talk about your project. What problem does it address? How does/might it work? How does it compare to competing methods and/or approaches to solving the problem? Summarize your initial project proposal in 1-3 paragraphs and put that information here.
-            
+            <h2>Project Overview:</h2>
+			<div>
+				Immersive virtual reality (VR) is the focus of a current engineering grand challenge: Enhance Virtual Reality. Beyond recreation, VR simulations are becoming increasingly important for occupational 
+				training, especially in remote or high-risk occupations. VR simulations usually allow the user to interact with virtual objects via camera-based appendage tracking, which is generally imprecise and 
+				has positional jitter. Hence, there is a need to more accurately track a user’s appendages for a more realistic simulation of the user’s motions in a virtual environment. Haptic feedback in virtual 
+				reality has countless applications in the future from training for many hands-on occupations to gaming with realistic environmental feedback; however, more current VR simulations do not provide 
+				enough haptic feedback and preexisting VR simulators with haptic feedback are overly expensive and too bulky to allow fluid movement. These limitations have stunted the growth of the VR training 
+				and recreational communities substantially.
+			</div>
+			
+			<div>
+				RevEx is a non-optical virtual reality (VR) input device with haptic feedback that creates a more immersive VR experience. This system will contain a low-power wearable device that collects sensor 
+				data and applies haptic feedback as well as a host computer running a dynamic VR simulation. The wearable also utilizes regenerative braking in conjunction with the haptic feedback to increase the 
+				battery life.
+			</div>
             <h2>Project Specific Success Criteria:</h2>
                 <ol>
                     <li>PSSC #1: Ability to read accelerometer and gyroscope data from an inertial measurement unit (IMU).</li>
-                    <li>PSSC #2: Ability to read elbow joint angle from an analog potentiometer.</li>
-                    <li>PSSC #3: Ability to transceive raw sensor data and haptic feedback information from/to wearable devices to the host computer.</li>
-                    <li>PSSC #4: Ability to provide passive haptic feedback on an elbow joint.</li>
-                    <li>PSSC #5: Ability to transform raw sensor data into arm position in a VR simulation.</li>
+                    <li>PSSC #2: Ability to read voltage from an analog potentiometer to infer elbow joint angle using an Analog-Digital Converter (ADC).</li>
+                    <li>PSSC #3: Ability to transceive raw sensor data and haptic feedback intensity value bi-directionally between the wearable device and host computer via Bluetooth Low Energy (BLE).</li>
+                    <li>PSSC #4: Ability to provide passive haptic feedback on an elbow joint by variably shorting motor coils.</li>
+                    <li>PSSC #5: Ability to estimate arm position in a virtual reality (VR) simulation on the host computer by fusing acceleration, gyroscope, and VR headset position/orientation.</li>
                 </ol>
         </div>
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->

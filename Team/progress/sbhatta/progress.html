@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+This is an example weekly progress report document that team members can use to report their individual progress 
+of their ECE477 senior design projects. Weekly progress reports are expected to follow the general guidelines
+presented in the "Progress Report Policy" document, available online at https://engineering.purdue.edu/ece477/Course/Policies/policies.html
+
+Please create 4 copies of this example, renaming each copy to <PurdueID>.html, where <PurdueID> corresponds to
+the Purdue ITAP Career Account ID given by Purdue to each individual team member. If you have any questions,
+contact course staff.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!--Reconfigurable base tag; used to modify the site root location for root-relative links-->
+<base href="https://engineering.purdue.edu/477grp6/" />
+
+<!--Content-->
+<title>ECE477 Course Documents</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="George Hadley">
+<meta name = "format-detection" content = "telephone=no" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/default.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/content.css">
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+</head>
+<body>
+<div id="wrapper_site">
+    <div id="wrapper_page">
+	<!-- Instantiate global site header.-->
+	<div id="header"></div>
+		<!-- Instantiate site global navigation bar.-->
+		<div id="menu"></div>
+	
+		<!-- Instantiate a page banner image. Page banner images should be 1100x350px and should be located within the local
+			img folder located at this directory level. -->
+		<div id="banner">
+			<img src="Files/img/BannerImgExample.jpg"></img>
+		</div>
+	
+		<!-- Instantiate "tools" needed for a page. Tools are premade functional blocks that can be used to build a page,
+			and include things such as a file lister (for listing out homework assignments or tutorials)
+		-->
+		<div id="content">
+            <h2>Progress Report for Swagat Bhattacharyya</h2>
+            
+            <h4>Week 2:</h4>
+            <b>Date:</b> 08/27/2021<br>
+            <b>Total hours:</b> 20<br>
+            <b>Description of design efforts:</b><br>
+            I spent this week working on theory, breadboard-level design of the hardware subsystems, and experimental validation. Additionally, I contributed the “Theory of Operation” 
+			section to the Functional Specification deliverable. The benchtop setup for the experiments detailed below is shown in Fig. 1.
+
+			<p></p>
+			<img src="Team/progress/sbhatta/img/week2/bench_setup.png" width="85%"></img>
+			<figcaption>Fig. 1: Bench and breadboard setup for week 2 experiments.</figcaption><br>
+
+			The following summarizes my progress on each hardware subsystem: 
+
+			<ul>
+				<li>
+					<b>Microcontroller</b><br>
+					For prototyping, I had ordered some STM32L081KZT6 chips and set one up on 
+					a breadboard this week. We were able to toggle a GPIO pin on the chip; however, we are 
+					currently facing issues reliably programming the microcontroller. The IDE error message 
+					essentially states either: (i) device not recognized or (ii) failed to reset device. We are not sure if 
+					this is truly a hardware issue or an issue with our IDE configuration. When we were able to 
+					program the microcontroller, the reset button needed to be manually asserted just before the 
+					program is uploaded. We are now checking if our IDE configuration works on a development
+					board (we are having issues with this as well). Additionally, Zach found out that we need to 
+					perform floating point computation on the wearable (we initially thought this would not be 
+					necessary); hence, we are now looking at the STM32L4 series. Unfortunately, these chips are 
+					only available in difficult-to-solder footprints due to the current chip shortage
+					<a href="https://www.digikey.com/en/products/filter/embedded-microcontrollers/685?s=N4IgjCBcoLQCxVAYygMwIYBsDOBTANCAPZQDaIcAnGAGyUgC6hADgC5QggC%2BhMATIhApIrAE4BXAsTIgArIy485g5lDAtVkPrMVA">STM32L4 Link</a>
+				</li>
+				<li>
+					<b>IMU</b><br>
+					We are waiting on a breakout board submitted to JLCPCB for our IMU, the BHI160B. This 
+					IMU is low-power, high-precision, can operate at 1.8 V, and can sample at the needed rate. But 
+					most importantly, it is in stock (we brought several), unlike many other IMU chips. After setup, 
+					we can use this chip to test long-distance I2C functionality.
+				</li>
+				<li>
+					<b>Haptic Feedback and Regenerative Braking</b><br>
+					This is one of the most innovative aspects of our 
+					project. Haptic feedback generated in the VR simulation (Eg. because of a collision in a VR 
+					simulation) is mapped to a “duty cycle” and transmitted to the wearable via BLE. This “duty 
+					cycle” is modulates the mean latch time of low-power solid-state relays. These relays will short 
+					the coils of a motor connected to the elbow joint via a gear reduction system. When the coils of 
+					a permanent magnet motor are shorted, the motor can act as an electronically-controlled rotary 
+					dashpot; this dampening effect is leveraged to deliver haptic feedback to the user. For a bipolar 
+					stepper motor, it can be mathematically shown that the greatest damping is achieved by 
+					separately shorting the phases (uses two relays), rather than connecting the phases in series and 
+					then shorting them (uses one relay). The braking torque generated by a bipolar stepper motor 
+					(the derivation is based off state equations given in 
+					<a href="https://ieeexplore.ieee.org/document/70170">https://ieeexplore.ieee.org/document/70170</a>) 
+					when the coils are shorted with duty cycle 𝐷 is given in the Laplace Domain by: 
+					<img src="Team/progress/sbhatta/img/week2/motor_eqn.png" width="85%"></img>
+					<p></p>
+					To experimentally characterize the viscous coefficient as a function of duty cycle, a test setup 
+					was created (more details can be found in Matthew’s report). The setup consisted of a pulley 
+					and a flywheel. A small mass is suspended on a string that goes over the pulley and terminates 
+					at the flywheel. The flywheel is connected to a bipolar stepper motor and an optical encoder. 
+					The experiment consisted of dropping the fixed mass for varying relay duty cycles and 
+					measuring the optical encoder output as the flywheel rotates. The mass is chosen such that the 
+					angular rate quickly approaches a terminal rate as shown in Fig 2.
+					<img src="Team/progress/sbhatta/img/week2/angular_rate.png" width="85%"></img>
+					<figcaption>Fig. 2: Experimental measurement of Angular Rate vs. Time for varying relay duty cycles.</figcaption><br>
+					The terminal rate for each duty cycle is computed by averaging the last 0.25 s of the 
+					corresponding angular rate data. The terminal rate is related to the viscous coefficient by:
+					<img src="Team/progress/sbhatta/img/week2/viscous_coeff.png" width="85%"></img>
+					<p></p>
+					Fig. 3 shows the terminal angular rate and viscous coefficient versus relay duty cycle for our 
+					stepper motor. Our experiment suggests that the viscous coefficient can be modulated over an 
+					order of magnitude (the required damping can be obtained using a gear reduction system).
+					<p></p>
+					<img src="Team/progress/sbhatta/img/week2/duty_torque.png" width="85%"></img>
+					<figcaption>Fig. 3: Terminal angular rate and viscous coefficient vs. relay duty cycle</figcaption><br>
+				</li>
+				<li>
+					<b>Power Measurement</b><br>
+					We have wired high-efficiency 1.8 V and 0.9 V regulators (ADP150 and
+					ISL21080DIH309Z) for our project. Power measurements are performed by via current shunt: 
+					the voltage drop across a 0.1 Ohm resistor connected between the power supply and 
+					breadboard is amplified by an INA121 instrumentation amplifier to precisely measure the 
+					instantaneous power draw of our system. Given this setup, the Power Draw of our system (W) is 
+					0.07385*V_Corrected, where V_Corrected is the offset-corrected INA121 output voltage (V).
+				</li>
+				<li>
+					<b>Analog Filterbank and Event Detector</b><br>
+					This has been a large time commitment for the last 
+					week. This circuit, shown in Fig. 4, behaves differently in simulation and reality. The filterbank 
+					and event detector are used for ADC antialiasing and as a wakeup interrupt for the 
+					microcontroller, respectively.
+					<p></p>
+					<img src="Team/progress/sbhatta/img/week2/analog_filter.png" width="85%"></img>
+					<figcaption>Fig. 4: Overall schematic of the analog filterbank and event detector</figcaption><br>
+					<img src="Team/progress/sbhatta/img/week2/differentiator_designs.png" width="85%"></img>
+					<figcaption>Fig. 5: Differentiator designs (a) standard robust differentiator (b) bandpass filter-based design</figcaption><br>
+				</li>
+				The general working principle of the event detector is as follows:
+				<ol>
+					<li>
+						There are two analog input channels, each of which feeds into a differentiator circuit 
+						(which outputs a voltage depending on the rate of change of the input signal).
+					</li>
+					<li>
+						Differentiator voltages are converted to currents, and the positive and negative 
+						currents are summed separately. The (nonlinear) V-I conversion is done passively via 
+						BAT54s diodes which have all terminals maintained at an equilibrium voltage of midrail 
+						(0.9 V) via negative feedback control.
+					</li>
+					<li>
+						The summed currents are converted back to voltages and subtracted, yielding an 
+						always-positive signal that can be thresholded to indicate if one of the analog input 
+						channels contains a transient signal. Transient signals indicate a potentially interesting 
+						event and can be used to wake the microcontroller from sleep.
+					</li>
+				</ol>
+				The design I used this week used the circuit shown in Fig. 5a. However, I am having severe issues tuning 
+				the sensitivity of the differentiator (I am not able to get a robust tuning that is neither insensitive nor 
+				hypersensitive). Nevertheless, the analog event detector currently draws 0.72 mW and has a trigger 
+				latency of 5 ms. An approximate differentiator design (shown in Fig. 5b) that is essentially a passive 
+				bandpass filter cascaded with a transimpedance amplifier seems promising (have not gotten to test it 
+				yet). The transfer function of the circuit shown in Fig. 5b is:
+				<p></p>
+				<img src="Team/progress/sbhatta/img/week2/transfer_function.png" width="45%"></img>
+			</ul>
+
+			<!-- Week 3 -->
+			<h4>Week 3:</h4>
+            <b>Date:</b> 09/05/2021<br>
+            <b>Total hours:</b> 10 hours<br>
+            <b>Description of design efforts:</b><br>
+			In week 3, I helped with the component analysis (“energy harvesting chip,” “IMU,” and “battery” sections). I 
+			ordered some breakout boards for the LSM20948, which is our new 9 DOF IMU. Due to the chip shortage, we will need 
+			to desolder the IMU chips from the breakout board. We made tis change because we realized that that a 9 
+			degree-of-freedom (DOF) IMU was physically necessary for accurate angle estimation (previously, we thought a 6-DOF 
+			sensor would suffice if we leveraged some clever mathematics). The BHI160B (our old IMU) could be connected to an 
+			external magnetometer since it has a sensor fusion core; however, the recommended magnetometer (BMM150) is in a 
+			dense BGA package, which would not be easy to solder. Nevertheless, my main R&D tasks this week were working on the 
+			haptic feedback system and meeting with Prof. Hong Tan (alongside Matthew). Our solid-state relays arrived this week, 
+			so we redid our haptic feedback torque tests (our experiment last week used mechanical relays). Fig. 6 shows a 
+			schematic of our haptic feedback generation circuit, which draws 2 mW (maximum at 100% duty cycle).
+
+			<img src="Team/progress/sbhatta/img/week3/haptic_schematic.png" width="50%"></img>
+			<figcaption>Fig. 6: Schematic of the haptic feedback generation circuit.</figcaption>
+
+			<br>
+			The CPC1020 optoelectronic relay was current-starved to lower power draw, which decreased the switching speed of the 
+			relay. We measured the switching speed by using the relay with a pullup resistor in a voltage divider configuration 
+			such that the voltage divider output drops when the relay is activated (see Fig. 7 on Matthew’s updates). The turn-on 
+			and turn-off time of the relay given our configuration were roughly 9 ms and 0.5 ms, respectively. This limits the PWM 
+			frequency and duty cycles that can be used in our design. The data collected with this setup are presented in Fig. 7 
+			and Fig. 8. Compared to last week, we observed significantly more linearity in the viscous coefficient (as a function 
+			of duty cycle), which agrees well with our theoretical model. The saturation in the viscous coefficient at low duty cycles 
+			is due to the limitation in the relay switching speed. The torques generated by the motor can be amplified via a gear 
+			reduction system. Since the motor torque also implicitly depends on the motor shaft angular rate, it can be shown that 
+			the torque felt by the user scales as the square of the gear reduction ratio.
+
+			<img src="Team/progress/sbhatta/img/week3/angular_rate_v_time.png" width="50%"></img>
+			<figcaption>Fig. 7: Measurement of Angular Rate vs. Time for varying relay duty cycles (10 Hz relay frequency).</figcaption>
+
+			<img src="Team/progress/sbhatta/img/week3/terminal_angular_rate.png" width="50%"></img>
+			<figcaption>Fig. 8: Terminal angular rate and viscous coefficient vs. relay duty cycle (10 Hz relay frequency).</figcaption>
+
+			<br>
+			Our meeting with Dr. Tan was extremely helpful. Matthew realized after our tests that stopping the user’s arm would be 
+			impractical and uncomfortable due to mechanical (mounting) considerations. Dr. Tan suggested that we produce an oscillatory 
+			torque (which we have already demonstrated – see Matthew’s updates) to give the sensation of feedback/resistance. There are 
+			several merits of this approach as compared to force-feedback; force-feedback systems may “fight” with the user’s intentions, 
+			producing discomfort, and they are usually more difficult to control. We are planning to collect linear acceleration data 
+			(to measure the vibration) so that Dr. Tan can give us some more insight as to how a user would perceive the input.
+        </div>
+	
+		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
+		<div id="footer"></div>
+    </div>
+</div>
+
+<!--JS-->
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#header").load("header.html");
+	$("#menu").load("navbar.html");
+	$("#footer").load("footer.html");
+});
+</script>
+</body>
+</html>

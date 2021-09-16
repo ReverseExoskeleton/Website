@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+This is an example weekly progress report document that team members can use to report their individual progress 
+of their ECE477 senior design projects. Weekly progress reports are expected to follow the general guidelines
+presented in the "Progress Report Policy" document, available online at https://engineering.purdue.edu/ece477/Course/Policies/policies.html
+
+Please create 4 copies of this example, renaming each copy to <PurdueID>.html, where <PurdueID> corresponds to
+the Purdue ITAP Career Account ID given by Purdue to each individual team member. If you have any questions,
+contact course staff.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!--Reconfigurable base tag; used to modify the site root location for root-relative links-->
+<base href="https://engineering.purdue.edu/477grp6/" />
+
+<!--Content-->
+<title>ECE477 Course Documents</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="George Hadley">
+<meta name = "format-detection" content = "telephone=no" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/default.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/content.css">
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+</head>
+<body>
+<div id="wrapper_site">
+    <div id="wrapper_page">
+	<!-- Instantiate global site header.-->
+	<div id="header"></div>
+		<!-- Instantiate site global navigation bar.-->
+		<div id="menu"></div>
+	
+		<!-- Instantiate a page banner image. Page banner images should be 1100x350px and should be located within the local
+			img folder located at this directory level. -->
+		<div id="banner">
+			<img src="Files/img/BannerImgExample.jpg"></img>
+		</div>
+	
+		<!-- Instantiate "tools" needed for a page. Tools are premade functional blocks that can be used to build a page,
+			and include things such as a file lister (for listing out homework assignments or tutorials)
+		-->
+		<div id="content">
+            <h2>Progress Report for Isaac Hagedorn</h2>
+            
+            <!--<h4>Week 1:</h4>
+            <b>Date:</b> -Enter today's date here-<br>
+            <b>Total hours:</b> -Enter the number of hours you worked this week here-<br>
+            <b>Description of design efforts:</b><br>
+            -Discuss your design efforts here. Remember to follow the guidelines presented in the Progress Report Policy, available <a href="https://engineering.purdue.edu/ece477/Course/Policies/">here</a>. This is a template entry; simply copy/paste this entry when doing progress reports each week.</br>
+	--!>
+            <br>
+
+		<h4>Week 2:</h4>
+		<b>Date:</b> 9/3<br>
+		<b>Total hours:</b> 10<br>
+		<b>Description of design efforts:</b><br>
+    	<br>This week I worked on standing up some basic testing environments/circuitry for Bluetooth testing as well as driver development testing on an STM32L0 microcontroller. 
+	The goal for this week was to setup the development environment for the microcontroller and Bluetooth chip. 
+	I worked first on setting up the testing environment for the microcontroller using LEDs to test my microcontroller drivers including initializing the GPIO registers, initializing the non-specific timer registers, and configuring individual pins for different modes. 
+	I wrote the drivers with the intention of being able to easily bypass the low-level coding of bit operations and converting those into higher level functions. 
+	I tested these drivers by setting up a simple LED circuit that toggled on and off LEDs with different timing initiatives if necessary. 
+	Additionally, I completed writing drivers for setting up the ADC and SPI peripherals, but I have yet to begin testing for those.</br>
+	<br><img src="Team/progress/ihagedorn/img/bluetooth.jpg" style="width:75%;height:50%;"></br>
+	<br>
+	For the Bluetooth testing, I setup a simple LED circuit, seen below, with an Arduino Uno that can turn on and off LEDS via wireless commands. 
+	The incorporates an HC-05 which communicates with another Bluetooth device such as an Android phone to wirelessly transmit terminal commands.</br>
+	<br>
+	In addition to writing drivers and Bluetooth testing code, I also assisted in setting up the actual microcontroller development environment configurations in Eclipse and Github code repositories for the website, software code, and embedded software code. 
+	During this time, I ran into several issues with the Eclipse environment and being able to flash the target device with built target over SWD. 
+	The flashing of our microcontroller on a breakout board currently runs into an issue which results in unreliably flashing the device with about a 50 percent success rate while using the reset button. 
+	The current theory is that this is a hardware issue with the breakout board, but further analysis will be needed to confirm this.</br>
+</br>
+	<br>
+		<h4>Week 3:</h4>
+		<b>Date:</b> 9/10<br>
+		<b>Total hours:</b> 11 <br>
+		<b>Description of design efforts:</b><br>
+	<br>
+	This week was a bit slow since I was wrapped up in several club events and other various commitments.
+	After starting the drivers last week, I was able to finish drivers for using the ADC and PWM with the DevBoard. 
+	These drivers are tested and ready for capability testing with actual components such as a stepper motor and potentiometer for frequency tests and proof-of-concept tests. 
+	Additionally, I received our Bluetooth chip this week and spent a considerable amount of time on board bring-up and integrating it into my original test setup for the HC-05. 
+	This included checking the different pins on the breakout board and interfacing with chip with AT commands.
+	</br>
+	<br>
+	On our microchip, I worked on resolving a flashing issue. 
+	I began my debugging adventure verifying various connections on the bread board and researching the SWD protocol with STM32. 
+	After verifying that all the breadboard connections checked out and the soldering points looked solid under a microscope, I brought up a new software environment in eclipse and tested it with the DevBoard. 
+	Eventually I discovered that the debug configurations for our original environment was linked to the wrong ELF file and there have been zero issues flashing the chip henceforth.
+	</br>
+	<br>
+	In addition to embedded development, I also helped out with project component analysis and software overview for this week. 
+	In the project component analysis, I provided research and analysis for the Bluetooth chip selection and microcontroller selection. 
+	Additionally, I helped create a state machine diagram below for our state logic and provided further details of the microcontroller’s operations within the project.
+	<br><img src="Team/progress/ihagedorn/img/State.png" style="width:75%;height:75%;"></br> 
+	</br>	                
+        </div>
+	
+		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
+		<div id="footer"></div>
+    </div>
+</div>
+
+<!--JS-->
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#header").load("header.html");
+	$("#menu").load("navbar.html");
+	$("#footer").load("footer.html");
+});
+</script>
+</body>
+</html>

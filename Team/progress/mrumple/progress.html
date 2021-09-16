@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+This is an example weekly progress report document that team members can use to report their individual progress 
+of their ECE477 senior design projects. Weekly progress reports are expected to follow the general guidelines
+presented in the "Progress Report Policy" document, available online at https://engineering.purdue.edu/ece477/Course/Policies/policies.html
+
+Please create 4 copies of this example, renaming each copy to <PurdueID>.html, where <PurdueID> corresponds to
+the Purdue ITAP Career Account ID given by Purdue to each individual team member. If you have any questions,
+contact course staff.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!--Reconfigurable base tag; used to modify the site root location for root-relative links-->
+<base href="https://engineering.purdue.edu/477grp6/" />
+
+<!--Content-->
+<title>ECE477 Course Documents</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="George Hadley">
+<meta name = "format-detection" content = "telephone=no" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/default.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/content.css">
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+</head>
+<body>
+<div id="wrapper_site">
+    <div id="wrapper_page">
+	<!-- Instantiate global site header.-->
+	<div id="header"></div>
+		<!-- Instantiate site global navigation bar.-->
+		<div id="menu"></div>
+	
+		<!-- Instantiate a page banner image. Page banner images should be 1100x350px and should be located within the local
+			img folder located at this directory level. -->
+		<div id="banner">
+			<img src="Files/img/BannerImgExample.jpg"></img>
+		</div>
+	
+		<!-- Instantiate "tools" needed for a page. Tools are premade functional blocks that can be used to build a page,
+			and include things such as a file lister (for listing out homework assignments or tutorials)
+		-->
+		<div id="content">
+            <h2>Progress Report for Matthew Rumple</h2>
+            
+			<!-- Week 2 -->
+            <h4>Week 2:</h4>
+            <b>Date:</b> 08/28/2021<br>
+            <b>Total hours:</b> 16 hours<br>
+            <b>Description of design efforts:</b><br>
+			This week was filled with several activites including task delegation, team homework assignments, design decisions and testing. Each of these things were done throughout the week and are recorded below.
+            <ul>
+				<li>
+					<b>Task Delegation</b><br>
+					As the team leader I decided to make sure that each and every time member understood what their primary objectives were. It is important for each person to understand their personal goals and how they
+					contribute to the overall team goals. With this in mind, I made sure to address the goals of each team member and check for their understanding of how important it was to team success. These goals were
+					delegated according to each team member's skills and specialites, with motor and analog testing falling to Swag and I, software low-level driver development and testing to Isaac, and sensor fusion
+					research to Zach. With all these tasks set, it set clear and easily achievable goals for each team member this week.
+				</li>
+				<li>
+					<b>Team Homework Assignments</b><br>
+					Both as a team and indiviually, we each contributed to the homework assignment due at the end of this week. While reviewing the other sections I worked primarily on the Mechanical, Thermal, and Economic
+					constraints of our project. I was best suited to fill out most of these areas with having additional review from the other teammates. This document was using in highlighting some key functional
+					specifications that are essential to our project actually becoming a product. It was very useful to perform some research on the ergonmics of handheld devices to determine that a target temperature of
+					45 C for our device was acceptable. This gives our team a specific temperature target that we can run tests for to make sure it meets functional specifications. I also had the chance to research the
+					prices of some competetive products that our product could replace, which helped determine a set price point for our total product cost, which was determined to be around $100.
+				</li>
+				<li>
+					<b>Design Decisions</b><br>
+					Several important design decisions were made this week, with many more on the way. The lectures helped us realize a few considerations that needed to be made to make sure we had the correct hardware for
+					our application. We decided that if we could get a low-power micro with a FPU, we could use the micro to perform sensor fusion and then send the final output data over Bluetooth communications, lowering
+					the amount of data we need to transmit to eventually conserve power. We also decided that it would be a good idea to test the robustness of I2C as an off-board communication solution. Odds are, we will
+					see a serious problem with noise and will need to switch to some sort of differential signalling to achieve off-board communications.
+				</li>
+				<li>
+					<b>Breakout Board Design</b><br>
+					Both our Bluetooth and IMU modules have been ordered and need to be tested. Therefore, it was essential that a breakout board design be created so that we could test these chips using just a breadboard
+					and any development microcontroller. These PCB's just needed to be an easy solution to testing the pinouts of these chips as well as testing the chips themselves. The breakout boards are also essential
+					to double checking that the footprint was made correctly, so we can use the same SMD footprint in our final design. Both of these footprints were saved in the 
+					<a href="https://github.com/ReverseExoskeleton/layouts">PCB Layout Repository</a> to allow for use in the entire team. We are aiming to have most of the footprints that are non-standard created by the 
+					end of the next two weeks, making the PCB design process much easier. The breakout for IMU board can be seen in figure 1 while the breakout for the Bluetooth board can be seen in figure 2.
+
+					<!-- Figures -->
+					<p><b>Figures</b></p>
+					<ul>
+						<li>
+							<figcaption>Figure 1. IMU Breakout Board</figcaption>
+							<img src="Team/progress/mrumple/img/week2/imu_breakout.png" width="85%"></img>
+						</li>
+						<li>
+							<figcaption>Figure 2. Bluetooth Breakout Board</figcaption>
+							<img src="Team/progress/mrumple/img/week2/bt_breakout.png" width="85%"></img>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<b>Passive Motor Breaking Test Apparatus</b><br>
+					It was important that we determine the "breaking curve" of the motor we wanted to use. This curve would help us transform any non-linear torque curve into a linear curve that could adapt to the spinning
+					speed of the motor. The data collected from this test would be instrumental to making sure that there is a consistent, quality haptic feedback generated by our passive motor system. This testing stand
+					just utilizes an encoder, a stepper motor, and a few 3D printed parts to help measure the braking toqure of the motor when we change the duty cycle of the mechanical (hopefully to be opto-electronic) relays.
+					A constant mass is tired to the end of a thin wire that is spooled around the main spoked spool attached to both the motor and encoder. The encoder allows us to watch the rotational speed of the motor
+					shaft so we can determine the torque generated by the motor at different speeds. Also, since we have the measurements of the components of the system, the only missing variable is the torque generated
+					by the motor, since we have the mass and lever distance from the center of the shaft. The Apparatus design can be seen in figure 3, while the physical testing stand can be seen in figure 4.
+
+					<!-- Figures -->
+					<ul>
+						<li>
+							<figcaption>Figure 3. Braking Test Assembly Drawing</figcaption>
+							<img src="Team/progress/mrumple/img/week2/cad_drawing.png" width="85%"></img>
+						</li>
+						<li>
+							<figcaption>Figure 4. Braking Test Assembly Setup</figcaption>
+							<img src="Team/progress/mrumple/img/week2/test_setup.jpg" width="85%"></img>
+						</li>
+					</ul>
+				</li>
+			</ul>
+
+			<!-- Week 3 -->
+			<h4>Week 3:</h4>
+            <b>Date:</b> 09/05/2021<br>
+            <b>Total hours:</b> 14 hours<br>
+            <b>Description of design efforts:</b><br>
+			This week consisted of several different tasks, including selection of a different IMU with a breakout board to match, haptic feedback motor testing, as well as a meeting with Dr. Tan about our haptic feedback
+			system. These events can be detailed below.
+			<ul>
+				<li>
+					<b>Different IMU Selection</b><br>
+					A major disruption in our design plans this week was the realization that we needed a magnetomoter to add an additional 3 DOF to our sensor to help correct drift. At first we decided that we could just
+					purchase the compatible Bosch part that links with our current 6 DOF IMU. Unfortunately, this part only comes in an extremely small BGA package (1.5mm x 1.5mm), which is just not feasible for our
+					application. Therefore, we decided we needed to hunt for another IMU. We came across several valid canidates but all of them were out of stock. We finally decided to go with the IvenSense ICM-20948 as
+					our new IMU. Although this raw chip is unavailable, we purchased several breakout boards from Sparkfun that could be used. Although it will be tough, we are going to desolder the part from the breakout
+					so we can use it in our design. This new part is an LGA part which is much more acceptable for our application.
+
+					<!-- Figures -->
+					<ul>
+						<li>
+							<figcaption>Figure 5. ICM-20948 Pinout and Footprint</figcaption>
+							<img src="Team/progress/mrumple/img/week3/ICM-20948_pinout.png" width="50%"></img>
+						</li>
+						<li>
+							<figcaption>Figure 6. ICM-20948 New Breakout Board</figcaption>
+							<img src="Team/progress/mrumple/img/week3/ICM-20948_breakout.png" width="50%"></img>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<b>Passive Motor Torque Testing</b><br>
+					While working on our IMU issues and researching possible fixes, we also decided to use our test rig and collect data to start plotting patterns and determining what our transfer function for applying
+					haptic feedback would look like. We varied the duty cycle and PWM frequency to determine what kind of feedback we were receiving. We also had the oscilloscope connected to the rotary encoder of the
+					apparatus so we could measure the angular rate as which the spool was spinning, vital for our physics calculations. All this data was collected and saved for post analysis.
+					<br>
+					Some interesting trends were found during post analysis, including the fact that our opto-electronic relays have a longer turn-on time due to the small current we are providing. This can be seen in
+					Figure 7 and forced us to switch to a PWM frequency of 10Hz. This frequency generates an interesting haptic vibration that may or may not be desired (we will be talking to Professor Tan about that).
+					This haptic ripple can be seen in the graph located in Figure 8. Figure 9 also shows a more concise data model of our current system, which will be translated into torque per duty cycle.
+
+					<!-- Figures -->
+					<ul>
+						<li>
+							<figcaption>Figure 7. Long Opto-Electronic Turn-On Time</figcaption>
+							<img src="Team/progress/mrumple/img/week3/opto_turnon.png" width="50%"></img>
+						</li>
+						<li>
+							<figcaption>Figure 8. Motion Graph for 10Hz - 20% Duty Cycle</figcaption>
+							<img src="Team/progress/mrumple/img/week3/10_20.png" width="85%"></img>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<b>Meeting with Dr. Tan</b><br>
+					Our meeting with Dr. Tan went extremely well. We spoke to her about several things including the haptic design of our project. There were several considerations that were brought up to her, and we
+					plan on sending her some more linear acceleration data when we collect it. When we send her this data, it will help her understand what our system may feel like and how much we should increase the
+					torque by (by gear reduction). While talking with Dr. Tan, we realized that we may not be shooting for resistance after all, but rather a haptic feedback warning. This passive haptic feedback will
+					be the first of its kind and we are hoping to demonstrate this novelty in our design. She mentioned that we may want to utilize the "vibration" created by the PWM frequency (seen in Figure 8) to
+					give the sensation of a signal. Figure 9 depicts the average velocity per duty cycle, sorted by PWM frequency. This graph helped us realize that we may not want to be creating much more resistance,
+					but rather the perception of resistance.
+					
+					<!-- Figures -->
+					<ul>
+						<li>
+							<figcaption>Figure 9. Chart Comparing PWM Frequency and Duty Cycle to Average Mass Velocity</figcaption>
+							<img src="Team/progress/mrumple/img/week3/haptic_chart.png" width="85%"></img>
+						</li>
+					</ul>
+				</li>
+			</ul>
+
+			<!-- <img src="Files/img/week2/cad_drawing.png"></img> -->
+        </div>
+	
+		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
+		<div id="footer"></div>
+    </div>
+</div>
+
+<!--JS-->
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#header").load("header.html");
+	$("#menu").load("navbar.html");
+	$("#footer").load("footer.html");
+});
+</script>
+</body>
+</html>
