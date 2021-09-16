@@ -61,7 +61,7 @@ contact course staff.
             section to the Functional Specification deliverable. The benchtop setup for the experiments detailed below is shown in Fig. 1.
 
             <p></p>
-            <img src="Team/progress/sbhatta/img/week2/bench_setup.png" width="85%" /></img>
+            <img src="Team/progress/sbhatta/img/week2/bench_setup.png" width="50%" /></img>
             <figcaption>Fig. 1: Bench and breadboard setup for week 2 experiments.</figcaption><br />
 
             The following summarizes my progress on each hardware subsystem:
@@ -113,7 +113,7 @@ contact course staff.
                     The experiment consisted of dropping the fixed mass for varying relay duty cycles and
                     measuring the optical encoder output as the flywheel rotates. The mass is chosen such that the
                     angular rate quickly approaches a terminal rate as shown in Fig 2.
-                    <img src="Team/progress/sbhatta/img/week2/angular_rate.png" width="85%" /></img>
+                    <img src="Team/progress/sbhatta/img/week2/angular_rate.png" width="60%" /></img>
                     <figcaption>Fig. 2: Experimental measurement of Angular Rate vs. Time for varying relay duty cycles.</figcaption><br />
                     The terminal rate for each duty cycle is computed by averaging the last 0.25 s of the
                     corresponding angular rate data. The terminal rate is related to the viscous coefficient by:
@@ -123,7 +123,7 @@ contact course staff.
                     stepper motor. Our experiment suggests that the viscous coefficient can be modulated over an
                     order of magnitude (the required damping can be obtained using a gear reduction system).
                     <p></p>
-                    <img src="Team/progress/sbhatta/img/week2/duty_torque.png" width="85%" /></img>
+                    <img src="Team/progress/sbhatta/img/week2/duty_torque.png" width="60%" /></img>
                     <figcaption>Fig. 3: Terminal angular rate and viscous coefficient vs. relay duty cycle</figcaption><br />
                 </li>
                 <li>
@@ -232,8 +232,8 @@ contact course staff.
             variation (due to capacitors and especially Schottky diodes not being well-matched). I could spend days tuning component
             tolerances; however, there would be no guarantee that I could compensate for an inferior circuit topology. My new
             single-channel event detector design is shown in Fig. 9.
-
-            <img src="Team/progress/sbhatta/img/week4/NewEventDet.png" width="85%" /></img>
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week4/NewEventDet.png" width="100%" /></img>
             <figcaption>Fig. 9: Schematic of the redesigned analog filterbank and event detector.</figcaption>
             <br />
 
@@ -247,8 +247,8 @@ contact course staff.
             generated via the forward voltage drop of two matched Schottky diodes. The comparator outputs are passed to an OR gate to generate the
             wakeup for the microcontroller (I have not implemented the OR gate yet). Fig. 10 shows the analog event detector responding to an event
             (i.e. a signal transient).
-
-            <img src="Team/progress/sbhatta/img/week4/EventDetResp.png" width="50%" /></img>
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week4/EventDetResp.png" width="60%" /></img>
             <figcaption>Fig. 10: Analog event detector responding to a signal transient (red trace) from a potentiometer. The highpass filter output (yellow trace) and comparator outputs (green and blue traces) are also shown.</figcaption>
             <br />
 
@@ -258,8 +258,8 @@ contact course staff.
             to Dr. Tan, we realized that we needed to accuracy determine the vibration felt by the user when haptic feedback is being applied. This vibration
             would be greatly determined by the gear ratio. Hence, I simulated the vibration felt by the user in MATLAB by numerically solving a nonlinear second
             order ODE. It was found that a 10:1 gear ratio would offer sufficient vibration during braking (simulation results are shown in Fig. 11).
-
-            <img src="Team/progress/sbhatta/img/week4/HapticsSim.png" width="50%" /></img>
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week4/HapticsSim.png" width="60%" /></img>
             <figcaption>Fig. 11: Simulation of the net acceleration felt by an IMU on the user’s palm and the arm rotation rate if a 50% PWM signal (at 10 Hz) is applied to the optoelectronic relays, and the user applies a constant torque of 1 N*m about their elbow joint.</figcaption>
             <br />
 
