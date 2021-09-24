@@ -218,12 +218,12 @@ contact course staff.
             (to measure the vibration) so that Dr. Tan can give us some more insight as to how a user would perceive the input.
 
             <!-- Week 4 -->
-            <h4>Week 3:</h4>
+            <h4>Week 4:</h4>
             <b>Date:</b> 09/10/2021<br />
             <b>Total hours:</b> 20 hours<br />
             <b>Description of design efforts:</b><br />
             In week 4, I wrote the electrical overview document and helped with the BOM. Matthew and Zach particularly helped my efforts by
-            making a schematic library and aiding with digitization of hand-drawn signal flow diagrams, respectively. In terms of design efforts, 
+            making a schematic library and aiding with digitization of hand-drawn signal flow diagrams, respectively. In terms of design efforts,
             I spent most of the week working on the `analog event detector’.
             There were several issues preventing proper functionality like severe power line noise and poor solder joints, which were
             eventually fixed. Tuesday, I managed to get my event detector design working somewhat, yet I scrapped my designs for this
@@ -262,6 +262,56 @@ contact course staff.
             <p></p>
             <img src="Team/progress/sbhatta/img/week4/HapticsSim.png" width="60%" /></img>
             <figcaption>Fig. 11: Simulation of the net acceleration felt by an IMU on the user’s palm and the arm rotation rate if a 50% PWM signal (at 10 Hz) is applied to the optoelectronic relays, and the user applies a constant torque of 1 N*m about their elbow joint.</figcaption>
+            <br />
+
+            <!-- Week 5 -->
+            <h4>Week 5:</h4>
+            <b>Date:</b> 09/24/2021<br />
+            <b>Total hours:</b> 12 hours<br />
+            <b>Description of design efforts:</b><br />
+            In week 5, I helped Matthew with the PCB organization figure in the mechanical overview. However, the vast majority of my design efforts were aimed toward
+            constructing and characterizing our system for harvesting energy from the back-emf of the stepper motor. I also made some restrictions that simplified the
+            power management system hardware design. The two main hardware simplifications I made were:
+            <ol>
+                <li>
+                    The battery can only charge via USB when the wearable is powered off. When the wearable is on, the battery charges via the energy harvesting circuit.
+                    This helps because the on-off switch (a DPDT switch) can also be used to toggle the battery charging source.
+                </li>
+                <li>
+                    The energy harvesting circuit feeds directly to a boost converter, which in turn feeds to the battery charging circuit. This method is much less efficient
+                    than the method proposed in the (original) “Electrical Overview” document; however, it is significantly simpler and more reliable.
+                </li>
+            </ol>
+            On Wednesday, I was unable to get our energy harvesting chip to work, and I was unable to understand why it was not working since the chip was a “black box.”
+            I was gently cautioned that I have very little time for prototyping; hence, I scrapped my previous energy harvesting circuit design and began anew.  I began my
+            design with a standard Schottky diode bridge rectifier, output capacitor, and boost converter. Joe and I realized that the diodes in the bridge rectifier were leaky,
+            causing the voltage on the storage capacitor to decay rapidly (Fig. 12).
+
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week5/Leakage.png" width="60%" /></img>
+            <figcaption>Fig. 12: Harvesting energy with a Schottky diode bridge rectifier. The stored charge on the capacitor leaks at a rate of roughly 4 uA.</figcaption>
+            <br />
+
+            I tried swapping out the BAT54s diodes I was using for 1N5819, but that did not help. If I added an extra Schottky diode after the bridge rectifier, the effective
+            dropout voltage would increase (the back-emf of the stepper motor is already a low voltage). Hence, I needed an ideal diode to block the bridge leakage current.
+            I created an ideal diode by using a BJT and a low-power instrumentation amplifier (unfortunately, there are no commercially-available ideal diode chips that work at
+            such low voltages). The schematic of our energy harvesting circuit is shown in Fig. 13.
+
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week5/EnergyHarvestingSch.png" width="90%" /></img>
+            <figcaption>Fig. 13: Schematic of the energy harvesting circuit.</figcaption>
+            <br />
+
+            When not in use, the instrumentation amplifier in the ideal diode (which draws 100 uW) can be shut off via a power-gating transistor (this is a future revision). 
+            Fig. 14 shows a demonstration of energy harvesting by dropping a 100 g mass off our test rig. The demonstration in Fig. 14 harvested 9.1 mJ of usable energy 
+            (measured via a 10 kOhm load at the 5 V boost converter output) from 1.32 J of gravitational potential energy, meaning our conversion efficiency is 0.7%. Although 
+            this efficiency sounds bad, it is a few times higher than state-of-the-art piezoelectric harvesting systems 
+            (<a href="https://www.researchgate.net/figure/Energy-conversion-efficiency-of-various-types-of-piezoelectric-raindrop-kinetic-energy_tbl3_309426746">https://www.researchgate.net/figure/Energy-conversion-efficiency-of-various-types-of-piezoelectric-raindrop-kinetic-energy_tbl3_309426746</a>) and adequate for a proof 
+            of concept especially given the constraint that the energy harvesting circuit should not interfere with the operation of the haptic feedback system.  My remaining 
+            design tasks are to: (1) Check if HBmS circuits work with MOSFETs (2) draw the schematics & PCBs for our boards and (3) order a new batch of parts.
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week5/Efficiency.png" width="60%" /></img>
+            <figcaption>Fig. 14: Method/demonstration of determining energy harvesting efficiency by dropping a mass. Yellow: Storage capacitor voltage, Green: 5 V Boost converter output, Blue: Ideal diode activation.</figcaption>
             <br />
 
         </div>
