@@ -103,7 +103,35 @@ contact course staff.
 	In addition to embedded development, I also helped out with project component analysis and software overview for this week. 
 	In the project component analysis, I provided research and analysis for the Bluetooth chip selection and microcontroller selection. 
 	Additionally, I helped create a state machine diagram below for our state logic and provided further details of the microcontroller’s operations within the project.
-	<br><img src="Team/progress/ihagedorn/img/State.png" style="width:75%;height:75%;"></br> 
+	<br><img src="Team/progress/ihagedorn/img/State.png" style="width:65%;height:50%;"></br> 
+	
+</br>
+	<br>
+		<h4>Week 4:</h4>
+		<b>Date: </b> 9/17<br>
+		<b>Total hours: </b>15<br>
+	<br>
+	This week was mostly focused on setting up SPI, I2C, Bluetooth/UART, and testing. 
+	I spent a majority of the week debugging the ZB7412-00 Bluetooth Low Energy chip since it didn’t seem to want to cooperate with my repeated attempts to interface with it over UART. 
+	I have also tried re-flashing the chip with the production software using a provided SDK and IDE over J-Link; however, outside of the observed availability signals on the two JTAG pins, I can’t seem to get the chip to communicate. 
+	Moving forward I’m looking to hookup every pin to a scope and recording its activity on power-up to see what is and isn’t happening. 
+	<br>
+	<br>
+	Additionally, this week I worked on setting up the drivers and testing out the MCU’s SPI and I2C protocols in order to interface and command our IMU. 
+	With the completion of these drivers I should be mostly finished with driver development and can move forward with creating header files along with integrating our pin mapping header file with these drivers. 
+	I’m currently working on developing some SPI and I2C tests so that I can watch the signals over a scope and confirm their functionalities. 
+	Additionally, I have been researching the commanding structure for the IMU so that I know what data to send it. 
+	I currently have a detailed address mapping for for the IMU, but I have yet to come across how to command it using SPI.
+	<br>
+	<br>
+	Finally, I worked on a macro test that integrated the drivers for the GPIOs, ADC, PWM, and timers into singular task, control the duty cycle of a LED using a potentiometer. 
+	This setup is pictured below and can realistically control the frequency of the LED at a step size of about 0.7 mV as the potentiometer spans from 0 to 3 volts. 
+	<br><img src="Team/progress/ihagedorn/img/breadboard.jpg" style="width:65%;height:50%;"></br>
+	<br>
+	On the non-technical side, I helped with the calculations for the different communication rates for the electrical overview and helped out on several bill of materials entries.
+	<br>
+	<br>
+	Next week I hope to finalize SPI and I2C testing and resolve my Bluetooth development issue. 
 	</br>	                
         </div>
 	
