@@ -302,16 +302,35 @@ contact course staff.
             <figcaption>Fig. 13: Schematic of the energy harvesting circuit.</figcaption>
             <br />
 
-            When not in use, the instrumentation amplifier in the ideal diode (which draws 100 uW) can be shut off via a power-gating transistor (this is a future revision). 
-            Fig. 14 shows a demonstration of energy harvesting by dropping a 100 g mass off our test rig. The demonstration in Fig. 14 harvested 9.1 mJ of usable energy 
-            (measured via a 10 kOhm load at the 5 V boost converter output) from 1.32 J of gravitational potential energy, meaning our conversion efficiency is 0.7%. Although 
-            this efficiency sounds bad, it is a few times higher than state-of-the-art piezoelectric harvesting systems 
-            (<a href="https://www.researchgate.net/figure/Energy-conversion-efficiency-of-various-types-of-piezoelectric-raindrop-kinetic-energy_tbl3_309426746">https://www.researchgate.net/figure/Energy-conversion-efficiency-of-various-types-of-piezoelectric-raindrop-kinetic-energy_tbl3_309426746</a>) and adequate for a proof 
-            of concept especially given the constraint that the energy harvesting circuit should not interfere with the operation of the haptic feedback system.  My remaining 
+            When not in use, the instrumentation amplifier in the ideal diode (which draws 100 uW) can be shut off via a power-gating transistor (this is a future revision).
+            Fig. 14 shows a demonstration of energy harvesting by dropping a 100 g mass off our test rig. The demonstration in Fig. 14 harvested 9.1 mJ of usable energy
+            (measured via a 10 kOhm load at the 5 V boost converter output) from 1.32 J of gravitational potential energy, meaning our conversion efficiency is 0.7%. Although
+            this efficiency sounds bad, it is a few times higher than state-of-the-art piezoelectric harvesting systems
+            (<a href="https://www.researchgate.net/figure/Energy-conversion-efficiency-of-various-types-of-piezoelectric-raindrop-kinetic-energy_tbl3_309426746">https://www.researchgate.net/figure/Energy-conversion-efficiency-of-various-types-of-piezoelectric-raindrop-kinetic-energy_tbl3_309426746</a>) and adequate for a proof
+            of concept especially given the constraint that the energy harvesting circuit should not interfere with the operation of the haptic feedback system.  My remaining
             design tasks are to: (1) Check if HBmS circuits work with MOSFETs (2) draw the schematics & PCBs for our boards and (3) order a new batch of parts.
             <p></p>
             <img src="Team/progress/sbhatta/img/week5/Efficiency.png" width="60%" /></img>
             <figcaption>Fig. 14: Method/demonstration of determining energy harvesting efficiency by dropping a mass. Yellow: Storage capacitor voltage, Green: 5 V Boost converter output, Blue: Ideal diode activation.</figcaption>
+            <br />
+
+            <!-- Week 6 -->
+            <h4>Week 6:</h4>
+            <b>Date:</b> 09/31/2021<br />
+            <b>Total hours:</b> 15 hours<br />
+            <b>Description of design efforts:</b><br />
+            In week 5, I worked on finalizing the schematic and layout for the Haptics and Battery-management System (HBmS) with Matthew. Essentially, I did the schematic, Matthew did most of the layout/routing, and we both made fine-adjustments to the PCB.
+            The schematic of the HBmS is shown in Fig. 15. This was the simpler of our two boards, so we sent it to JLC-PCB for fabrication after we performed an internal design review. We seek to have the HBmS board tested and characterized (to a moderate level of rigor)
+            by the end of week 8. We made two simplifications that were tested on a breadboard: (i) we replaced the two BJTs in our haptics system with one low-threshold nMOS transistor and (ii) we removed the ideal diode subcircuit, which mitigates charge leakage from the
+            supercapacitors on the energy harvesting circuit. There are three leakage major charge mechanisms: (i) “backflow” through the bridge rectifier (~4 uA), (ii) capacitor self-discharge (~5 uA), and (iii) boost converter input leakage current (~1 uA). It turns out
+            that the amount of charge leakage the ideal diode would be preventing in the energy harvesting system dwarfs the current draw of the ideal diode (~40 uA), and it is simply not worth allocating microcontroller clock cycles toward micromanaging the power draw of
+            the ideal diode. Our crude energy harvesting system still performs well, but the storage capacitor size must be selected carefully to ensure that it fully-charges above the boost-converter on-threshold during an average elbow motion while storing appreciable energy.
+            The only HBmS circuit not tested on the breadboard is the LiPo battery charging circuit (which I got from the application notes on the PMIC datasheet). We plan to have the DAqS schematics completed and parts ordered by this weekend. Additionally, by the end of next
+            week, we need to test that we can reliably: (i) program our barebones microcontroller running on a 1.8 V supply rail and (ii) communicate with our Bluetooth module with 1.8 V logic (the datasheet says the module can operate at 1.8 V, it but recommends 3.3 V as the operating voltage).
+
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week6/HBmS.png" width="100%" /></img>
+            <figcaption>Fig. 15: Schematic of the Haptics and Battery-management System (HBms) [V1.0].</figcaption>
             <br />
 
         </div>
