@@ -395,6 +395,85 @@ contact course staff.
 					</li>
 				</ul>
 			</p>
+			<br>
+
+			<h4>Week 5</h4>
+			<p>
+				<b>Date:</b> 9/24<br>
+				<b>Total hours:</b> ~8 hours<br>
+				<b>Description of design efforts:</b><br>
+				This week, my efforts focused on the host-side BLE interface and the VR
+				simulation.
+				<br>
+				After my experience working in Unreal last week, I finally got a taste 
+				of how little I know about game development and game engines. That being
+				said, I talked with Mattew and decided that choosing Unity as our game
+				engine would make much more sense as Matt has 3+ years of experience developing
+				VR applications in Unity. Thus, developing in Unity	would speed up my
+				learning process a lot as Matt can answer any questions I have. 
+				<br>
+				Having decided to use Unity, I did some research to determine the simplest
+				way to integrate BLE communication into a Unity application. The main problem
+				is that the Unity editor cannot access the .Net-Core library needed for 
+				the Windows BLE library (UWP API) (see this
+				<a href="https://stackoverflow.com/questions/60686302/ble-device-with-unity/65403179">
+					Stack Overflow Post
+				</a>
+				and this
+				<a href="https://mtaulty.com/2019/03/22/rough-notes-on-experiments-with-uwp-apis-in-the-unity-editor-with-c-winrt/">
+					blog post
+				</a>
+				for more information). The typical solution is to call the UWP API from a C++
+				application and then create a dll that components in Unity can use.
+				<br>
+			  Due to the popularity of using BLE in Unity projects, people have released
+				open source code to interact with the UWP BLE API. I read the code and 
+				tested a few of the open source implementations and found one that will
+				suite our needs well: 
+				<a href="https://github.com/adabru/BleWinrtDll">Adam Brunnmeier's BleWinrtDll</a>
+				. See Fig. 6 for a screenshot of the BleWinrtDll sample demo I tested in
+				Unity from within my appartment.
+				<br>
+				<img src="Team/progress/zghera/img/week5/unity-ble-demo.jpg" style="width:75%;height:75%;">
+				<br>Fig. 6: Unity BleWinrtDll Demo
+				<br>
+				<br>
+				Now that we have a easy way to connect and read data over BLE, the next step
+				for me was to get some fundamentals in Unity development. At the same time, 
+				testing the sensor fusion algorithm identified in week 3 (see above) is a
+				critical step. However Isaac is still working on communication between 
+				the MCU and our BLE chip. So we decided that in the meantime it would be
+				beneficial to send the raw IMU data over serial from an Arduino to the
+				host-computer. 
+				<br>
+				To accomplish both goals, I started developing a Unity scene that reads 
+				data from a serial port and displays the raw IMU data in a 2D dashboard (
+				see Fig. 7). As part of this, I am reading/watching a lot of basic 
+				Unity tutorials and asking Matthew a lot of questions as I develop this 
+				initial prototype scene and try to get up to speed with Unity.
+				<br>
+				<img src="Team/progress/zghera/img/week5/unity-imu-data-display.jpg" style="width:95%;height:95%;">
+				<br>Fig. 7: Unity IMU Data Serial Display
+			</p>
+			<br>
+
+			<h4>Week 6</h4>
+			<p>
+				<b>Date:</b> 10/1<br>
+				<b>Total hours:</b> TBD hours<br>
+				<b>Description of design efforts:</b><br>
+				...
+				<br>
+				...
+				<ul>
+					<li>
+						<b>...</b>
+						<br>
+						...
+					</li>
+				</ul>
+			</p>
+			<br>
 
 
 			<br>
