@@ -110,6 +110,7 @@ contact course staff.
 		<h4>Week 4:</h4>
 		<b>Date: </b> 9/17<br>
 		<b>Total hours: </b>15<br>
+		<b>Description of design efforts: </b><br>
 	<br>
 	This week was mostly focused on setting up SPI, I2C, Bluetooth/UART, and testing. 
 	I spent a majority of the week debugging the ZB7412-00 Bluetooth Low Energy chip since it didn’t seem to want to cooperate with my repeated attempts to interface with it over UART. 
@@ -132,7 +133,32 @@ contact course staff.
 	<br>
 	<br>
 	Next week I hope to finalize SPI and I2C testing and resolve my Bluetooth development issue. 
-	</br>	                
+	</br>
+</br>
+	<br>
+		<h4>Week 5:</h4>
+		<b>Date: </b> 9/24<br>
+		<b>Total hours: </b>15<br>
+		<b>Description of design efforts: </b><br>
+	<br>
+	This week was nothing glamorous or pretty. 
+	It was mostly brute forcing code and debugging the results in order to understand what was going wrong with the Bluetooth and IMU interfacing.  
+	At the start of the week we were working on talking to the Bluetooth chip over serial communication and talking to the IMU over SPI.  
+	<br>
+	<br>
+	After working through multiple datasheets for the ZB7412-00 and not seeing any activity on any of the pins, I tested the current draw of the chip and found that the draw was 0 amperes. 
+	As a result, we changed over to the RN4020 which I had previously interfaced with in weeks 2 and 3. 
+	The interfacing of this chip over a serial connection can be seen in the figure below, and includes various ASCII commands to setup the chip, advertise, bond, and stand up the connection.
+	<br><img src="Team/progress/ihagedorn/img/Serial1.jpg" style="width:65%;height:50%;"><br>
+	<br>
+	The second accomplishment of the week was interfacing with the IMU over SPI. After, once again, digging through multiple datasheets. 
+	I was able to get the IMU to interface with an Arduino using a prebuilt library and one key assumption. 
+	The assumption is that since the SPI pins share in common with the I2C pins that I have to use a similar commanding structure to I2C over the SPI lines in order for it to register mu commands.
+	The results of this interface can be seen in the data output on the serial monitor below.
+	I haven’t yet figured out the why this is the case, but I hope to make progress on this and commanding the IMU with the STM32 over the next week. 
+	Additionally I hope, to begin integrating the analog event detector and other subsystems together next week or work with Zach on sensor fusion and Bluetooth packaging.
+	<br><img src="Team/progress/ihagedorn/img/serial2.jpg" style="width:65%;height:50%;"><br>
+</br>                
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
