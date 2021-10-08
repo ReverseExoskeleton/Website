@@ -299,7 +299,50 @@ contact course staff.
 					</ul>
 				</li>
 			</ul>
+			
+			<!-- Week 6 -->
+			<h4>Week 6:</h4>
+            <b>Date:</b> 09/26/2021<br>
+            <b>Total hours:</b> 18 hours<br>
+            <b>Description of design efforts:</b><br>
+			This week was a mostly hardware design with a dash of mechanical detail. The printed circuit board for the HBmS was routed and the schematic was finalized. We realized the need to test the HBmS was extremely important, so we opted
+			to print this board as soon as possible.
 
+			<ul>
+				<li>
+					<b>IMU Communication Issues</b><br>
+					Thankfully, Isaac was able to get SPI working while attempting to contact the IMU. Apparently, the IMU needed to be addressed first, similar to I2C protocol, but responded correctly after that. This is a huge relief because
+					we can now focus our attention on the Bluetooth module communications. This is one of the most crucial parts of our design and needs to be figured out as soon as possible. Once the Bluetooth module communication issues are
+					figured out, we can fully route the second PCB confidently, allowing us more time for printed hardware debugging.
+
+				</li>
+				<li>
+					<b>HBmS PCB Routing</b><br>
+					After a couple nights of work, the HBmS PCB has been finalized and routed. This is the main analog component of our design, so we wanted a chance to iterate over the design a second time if we needed to. This allows us some
+					room for error if our PCB doesn't work the first time. This also allows me the chance to start working on the mechanical design a little more, to start accomodating for the HBmS PCB on the physical packaging. Hopefully this
+					board will show up within a week or so so that we can start the testing procedures for the HBmS. The system interface to the DAqS is simple enough that it can be replicated by an AD2, allowing for easy test bench setup.
+					Testing the haptic feedback and battery components of our design now will greatly improve the chances of our project's success. The front and back copper layers can be seen in figure 14 and 15 respectively.
+					
+					<!-- Figures -->
+					<ul>
+						<li>
+							<figcaption>Figure 14. Front of the HBmS PCB</figcaption>
+							<img src="Team/progress/mrumple/img/week6/HBmS_Front.png" width="90%"></img>
+						</li>
+						<li>
+							<figcaption>Figure 15. Back of the HBmS PCB</figcaption>
+							<img src="Team/progress/mrumple/img/week6/HBmS_Back.png" width="90%"></img>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<b>HBmS Mechanical Considerations</b><br>
+					Routing this board has given me the opportunity to start designing the enclosure for the HBmS board, power switch, and battery. These mechanical designs are bettery to complete and get out of the way, as the mechanical design
+					is also very important to the success of this project. Therefore, I will be modeling the 3D CAD model of this board, along with some of the mechanical components that will house several sub components. This design will be for the
+					lower part of the upper arm portion of the device. I will most likely be modeling these items over this weekend, and they will be reported in more detail next progress report.
+
+				</li>
+			</ul>
 			<!-- <img src="Files/img/week2/cad_drawing.png"></img> -->
         </div>
 	

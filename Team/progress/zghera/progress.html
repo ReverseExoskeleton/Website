@@ -460,18 +460,97 @@ contact course staff.
 			<h4>Week 6</h4>
 			<p>
 				<b>Date:</b> 10/1<br>
-				<b>Total hours:</b> TBD hours<br>
+				<b>Total hours:</b> ~12 hours<br>
 				<b>Description of design efforts:</b><br>
-				...
+				This week was soely focused on development and testing of the serial
+				communication interface transmitting the IMU data from the Arduino
+				to the host computer. Although we will be using the STM32 and BLE for
+				transmitting sensor data, Isaac is starting to realize that interfacing
+				with the BLE and IMU chips is non-trivial. Thus, the importance of this
+				serial communication is critical to facilitate development of the software
+				on the host computer.
 				<br>
-				...
-				<ul>
-					<li>
-						<b>...</b>
+				I need live sensor data to test the sensor fusion and other aspects of the
+				VR simulation while Isaac works on the interfacing with the IMU and BLE with
+				the STM MCU. Once Isaac is ready for BLE, all I have to do is swap in the
+				serial tranceiver object with an analogous BLE tranceiver object. Additionally,
+				if there are ever any problems with the STM MCU once BLE and IMU interfacing is
+				complete, I can still continue testing the host computer with the serial interface.
+				<br><br>
+				Isaac found an 
+				<a href="https://github.com/sparkfun/SparkFun_ICM-20948_ArduinoLibrary">
+				Arduino library for the IMU chip
+				</a>
+				and used the 
+				<a href="https://github.com/sparkfun/SparkFun_ICM-20948_ArduinoLibrary/blob/main/examples/Arduino/Example5_DualSPITest/Example5_DualSPITest.ino">
+				dual SPI test script
+				</a>
+				as a starting point. After Isaac modified the script such that we only used a single SPI
+				line with our IMU, I wrote some Arduino code to write IMU packets (based on the structure
+				defined in the software overview) over the serial line (See Fig. 8).
+				<br>
+				As of now, `floatToBytes()` simply `memcpy`s the 16 bit float into the byte buffer. However,
+				depending on architecutre of the chip the Arduino uses, I may need to do some additional
+				manipulation so that the host can properly decode the two bytes into a 16-bit float.
+				<br><br>
+				<img src="Team/progress/zghera/img/week6/arduino-imu-serial.jpg" style="width:50%;height:50%;">
+				<br>Fig. 8: Arduino Script to Send IMU Packer over Serial Line
+				<br>
+				<br>
+				I also wrote the serial interface on the host-side from using the Windows SerialPort
+				library and C# threads (see Fig. 9 and Fig. 10). 
+
+				<div style="display: flex;align-items: flex-start;">
+					<div style="flex: 50%;padding: 5px;">
+						<img src="Team/progress/zghera/img/week6/host-imu-serial1.jpg" style="width:100%;height:100%;">
+						<br>Fig. 9: SerialReader Class that is Responsible for Reading and Decoding IMU Packets Received on the Host Computer.
+					</div>
+					<div style="flex: 50%;">
+						<img src="Team/progress/zghera/img/week6/host-imu-serial2.jpg" style="width:100%;height:100%;">
+						<br>Fig. 10: Other Classes Used by the SerialReader Class on the Host Computer.
+					</div>
+				</div>
+				<br><br>
+
+				I has some initial success with this implementation this week. As seen in Fig. 11, the IMU
+				data is successfully received on the host computer. While this is a great first step, there
+				are multiple areas for improvement before I can move on to implementing and testing sensor fusion:
+				<ol>
+					<li><b>Thread reader vs. Packet received event handler</b>
 						<br>
-						...
+						There is a build in event handler method build into the SerialPort class using C# delegates.
+						I initially tried this approach but the event was never triggered so it appeared that no 
+						packets were received on the host. I want to see if I can get this method working as it is
+						more readable, efficient, and less error prone than manually manipulating threads and
+						packet retreival.
 					</li>
-				</ul>
+					<li><b>Filter out IMU Start Message from Packet Retreival</b>
+						<br>
+						As seen in Fig. 11, the first thing the Arduino sends over serial is an initialization
+						string from the IMU. I need to be able to filter this out on the host such that
+						the the data packets are aligned correctly (i.e. don't let chars from init message sneak
+						into the data packets).
+					</li>
+					<li><b>Arduino packet send at 100 Hz</b>
+						<br>
+						Because we will be sending over bluetooth at 100 Hz, we should replicate this in the 
+						serial send interface as well.
+					</li>
+					<li><b>Update UI in Unity</b>
+						<br>
+						As seen in Fig. 7 of week 5, I created a toy UI. The final step once all the communications
+						are working properly is to update this UI to help get me more familiar with interacting with
+						Unity game objects and have a prettier way to view current IMU data before implementing
+						the sensor fusion and associated scene.
+					</li>
+				</ol>
+
+				<br><br>
+				<img src="Team/progress/zghera/img/week6/imu-data-received-in-unity.jpg" style="width:45%;height:45%;">
+				<br>Fig. 11: Unity Terminal Output When Running Both the Arduino and Host-Computer IMU Packet Transmit Code.
+				<br>
+				<br>
+
 			</p>
 			<br>
 

@@ -158,7 +158,35 @@ contact course staff.
 	I haven’t yet figured out the why this is the case, but I hope to make progress on this and commanding the IMU with the STM32 over the next week. 
 	Additionally I hope, to begin integrating the analog event detector and other subsystems together next week or work with Zach on sensor fusion and Bluetooth packaging.
 	<br><img src="Team/progress/ihagedorn/img/serial2.jpg" style="width:65%;height:50%;"><br>
-</br>                
+</br>   
+	<br>
+		<h4>Week 6:</h4>
+		<b>Date: </b> 10/1<br>
+		<b>Total hours: </b>16<br>
+		<b>Description of design efforts: </b><br>
+	<br>
+	This week, I was finally able to interface with each chip from the STM32. 
+	After way too much time debugging, I was finally able to receive back the correct WHO_AM_I response from the IMJU pictured below. 
+	I’m not completely sure what the actual issue was; rather, I kept addressing a series of possible issues until I was able to see the correct response. 
+	The first issue I noticed was that the SPI was not acting as expected; rather, it was behaving like an I2C protocol with two data lines which responded at erratic times. 
+	I resolved this issue by allowing my Arduino Due to talk with the chip and permanently setting several bits that disabled the I2C and persistently enabled the SPI lines. 
+	The next issue I resolved was the polarity. 
+	I had to set another bit in the configuration register in order to establish the polarity; otherwise I presume the polarity is in some undetermined state. 
+	The last issue I noticed was the coupling of the NSS and MOSI lines. 
+	To resolve this issue I realized that although the chip was grounded the lines still seemed to be floating, so I added an additional ground line and the lines seemed to finally separate. 
+	<br><img src="Team/progress/ihagedorn/img/SPI_Scope.png" style="width:65%;height:50%;"><br>
+	<br>
+	While I was debugging the IMU interfacing, I also set up drivers for the UART peripheral in order to print out messages and values from the IMU. 
+	This peripheral will be used with the BLE chip to command it. 
+	Later in the week, I was able to use the UART to configure the RN-4020 which is our new BLE chip after having several unresolvable issues with the ZB7412. 
+	I am able to configure the chip properly and connect; however, I sporadically lose connection and I’m still figuring out how to pack floats into packets to put in the air. 
+	<br>
+	<br>
+	Lastly, I worked on starting the software formalization for next week. 
+	This week I worked on collecting information for all of our third-party software libraries and laying out our testing plan for each chip and unti testing for the drivers. 
+	I believe that most of testing will surround the IMU data collection and BLE dropped connection handling.<br>
+</br> 
+             
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
