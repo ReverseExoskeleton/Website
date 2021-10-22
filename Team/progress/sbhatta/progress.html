@@ -338,19 +338,43 @@ contact course staff.
             <b>Date:</b> 10/08/2021<br />
             <b>Total hours:</b> 10 hours<br />
             <b>Description of design efforts:</b><br />
-            This week, I worked on finalizing the schematic for the DAqS with Isaac. The completed schematic for the DAqS 
-            is shown in Figure 16. Together we confirmed that the MCU pinmap would support the required functionality 
-            (ADC, UART, SPI, I2C, Wakeup Interrupt). We also confirmed the Bluetooth and MCU pinmap. We changed the 
-            pinmap once during the week because of a discovery Isaac made during prototyping with the bluetooth module. 
-            Unfortunately, Matthew had already finished the PCB layout at this point. I also decided that we should put 
-            more emphasis in segregating the analog and digital portions of the PCB. Hence, we redid the placement of 
-            components and the routing (to Matthew’s chagrin). Matthew placed and routed components for another 15 hours. 
-            Once he was done, I simply cleaned up some of the tracks, vias, adjusted track widths, and modified the 
+            This week, I worked on finalizing the schematic for the DAqS with Isaac. The completed schematic for the DAqS
+            is shown in Figure 16. Together we confirmed that the MCU pinmap would support the required functionality
+            (ADC, UART, SPI, I2C, Wakeup Interrupt). We also confirmed the Bluetooth and MCU pinmap. We changed the
+            pinmap once during the week because of a discovery Isaac made during prototyping with the bluetooth module.
+            Unfortunately, Matthew had already finished the PCB layout at this point. I also decided that we should put
+            more emphasis in segregating the analog and digital portions of the PCB. Hence, we redid the placement of
+            components and the routing (to Matthew’s chagrin). Matthew placed and routed components for another 15 hours.
+            Once he was done, I simply cleaned up some of the tracks, vias, adjusted track widths, and modified the
             silkscreen. After fall break (and before our design review), we are planning to populate and test the HBmS.
 
             <p></p>
             <img src="Team/progress/sbhatta/img/week7/DAqS.png" width="100%" /></img>
             <figcaption>Fig. 16: Schematic of the Data Acquisition System (DAqS) [V1.0].</figcaption>
+            <br />
+
+            <!-- Week 9 -->
+            <h4>Week 9:</h4>
+            <b>Date:</b> 10/22/2021<br />
+            <b>Total hours:</b> 5 hours<br />
+            <b>Description of design efforts:</b><br />
+            This week, I debugged the HBmS PCB (our debugging setup is shown in Fig. 17). The PCB had one major problem: 
+            the LiPo charging circuit was not working as intended; the LiPo charger IC was keeping the battery isolated 
+            from the rest of the board unless I momentarily (manually) pulled the VDD pin of the IC high during startup. 
+            I believe that the charging chip is intended for more of a power source backup scenario; hence, the IC might 
+            need the primary source (USB power for example) to be present at startup before it can switch over to battery 
+            supply. This issue was particularly vexing because it was not mentioned in the datasheet. We are using an external 
+            battery-charging module as a workout for debugging and characterization. This module works well and should be simple 
+            to reverse-engineer into our design (perhaps as a patch). To keep with our timeline, we might implement quick fixes 
+            by jumping wires and adding a patch (and send out a final iteration after we debug our other board). All other HBmS 
+            systems are working nominally, and we are looking to do a full numerical characterization this weekend. The energy 
+            harvesting circuit is producing some haptic feedback, which will be measurable with our test setup but might not be 
+            noticeable by the user. When we do our characterization test, it will be interesting to see how the haptic energy 
+            harvesting and haptic feedback circuits interact in terms of net power draw/generation and net braking.
+
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week9/Debugging.png" width="60%" /></img>
+            <figcaption>Fig. 17: HBmS debugging setup.</figcaption>
             <br />
 
         </div>
