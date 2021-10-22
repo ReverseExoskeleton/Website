@@ -531,6 +531,12 @@ contact course staff.
 						the the data packets are aligned correctly (i.e. don't let chars from init message sneak
 						into the data packets).
 					</li>
+					<li><b>Verify Floating Point Byte Encode/Decode Strategy</b>
+						<br>
+						As mentioned above, verify if the float memcpy approach works for serializing the 
+						16-bit floats provided by the IMU library. If not, find a different approach to
+						encode the floats as two bytes and then decode back to floats on the host.
+					</li>
 					<li><b>Arduino packet send at 100 Hz</b>
 						<br>
 						Because we will be sending over bluetooth at 100 Hz, we should replicate this in the 
@@ -547,13 +553,75 @@ contact course staff.
 
 				<br><br>
 				<img src="Team/progress/zghera/img/week6/imu-data-received-in-unity.jpg" style="width:45%;height:45%;">
-				<br>Fig. 11: Unity Terminal Output When Running Both the Arduino and Host-Computer IMU Packet Transmit Code.
-				<br>
-				<br>
-
+				<br>Fig. 11: Unity Terminal Output When Running Both the Arduino and Host-Computer IMU 
+				Packet Transmit Code.
+				<br><br>
 			</p>
 			<br>
 
+			<h4>Week 7</h4>
+			<p>
+				<b>Date:</b> 10/8<br>
+				<b>Total hours:</b> ~14 hours<br>
+				<b>Description of design efforts:</b><br>
+				This week was focused on continuing the efforts for transmitting and
+				displaying IMU data on the host computer. I was able to get a fully
+				function test working this week (see Fig. 12).
+				<br><br>
+				<img src="Team/progress/zghera/img/week7/unity-imu-data-panel.jpg" style="width:65%;height:65%;">
+				<br>Fig. 12: Simple Unity IMU Data Panel.
+				<br><br>
+				Please see a quick summary of my soltions for each improvement areas that I listed in week 6:
+				<ol>
+					<li><b>Thread reader vs. Packet received event handler</b>
+						<br>
+						I found that this DataReceived event does not work unless you send specific characters - see
+						<a href="https://www.vgies.com/a-reliable-serial-port-in-c/">this article</a>
+						. Instead, I took the advice of the article and used the BaseStream object of SerialPort
+						to accomplish asynchronous reading from the input buffer.
+					</li>
+					<li><b>Filter out IMU Start Message from Packet Retreival</b>
+						<br>
+						This was accomplished with simple string subscripting and loops. 
+					</li>
+					<li><b>Verify Floating Point Byte Encode/Decode Strategy</b>
+						<br>
+						The memcpy strategy did not product correct results. Instead, I adapted 
+						<a href="https://stackoverflow.com/a/37761168">
+							an implementation of the IEEE 754-2008 half-precision float conversion
+						</a>
+						for encoding and decoding the 16-bit float on the MCU and host, respectively.
+					</li>
+					<li><b>Arduino packet send at 100 Hz</b>
+						<br>
+						I accomplished this by changing the baud rate of the packet send and Unity's
+						preffered frame update rate.
+					</li>
+					<li><b>Update UI in Unity</b>
+						<br>
+						I watched some additional Unity tutorials on connecting scripts to game objects to figure
+						out how to properly update the text elements of the static UI I created in week 5.
+					</li>
+				</ol>
+				<br>
+
+				I also spent a significant portion of my week helping Isaac with the software formalization 
+				this week. Here is a summary of my contributions:
+				<ul>
+					<li>Section 1: Table entries for x-io technologies Fusion, Unity, and BleWinrtDll.</li>
+					<li>
+						Section 2: Host Computer VR Simulation (and sub-sub-sections) subsection and the 
+						host portion of the BLE section.
+					</li>
+					<li>Section 3: Host Computer VR Simulation subsection.</li>
+					<li>Component Diagrams: Top-level and host computer specific (see Fig. 13) diagrams.</li>
+				</ul>
+				<br><br>
+				<img src="Team/progress/zghera/img/week7/software-formalization-host.jpg" style="width:65%;height:65%;">
+				<br>Fig. 13: Software Formalization Host Software Component/Progress Diagram.
+				<br><br>
+			</p>
+			<br>
 
 			<br>
 		</div>

@@ -263,7 +263,7 @@ contact course staff.
 					<b>Mechanical Design Research</b><br>
 					Throughout the mechanical overview and commercial analysis, I learned a lot of good design practices for the packaging of our product. For starters, I found that introducing a 2-strap mounting method instead of
 					a single strap mounting method would maintain two points of contact for each section of the arm, keeping the orientation of the brace static, making sure that the brace did not twist or rotate in any weird
-					directions. I also learned that it is important to mount as much mass as possible to the upper-aram section, since anything mounted to the lower arm section will be rotating whenever the user rotates their elbow.
+					directions. I also learned that it is important to mount as much mass as possible to the upper-arm section, since anything mounted to the lower arm section will be rotating whenever the user rotates their elbow.
 					These design considerations along with several padding and distance suggestions will allow the system to be lightweight, portable, non-obstructive, and overall pleasent to wear. Figure 12 displays the preliminary
 					CAD drawings of the mechanical system, including some basic dimenions.
 
@@ -341,6 +341,72 @@ contact course staff.
 					is also very important to the success of this project. Therefore, I will be modeling the 3D CAD model of this board, along with some of the mechanical components that will house several sub components. This design will be for the
 					lower part of the upper arm portion of the device. I will most likely be modeling these items over this weekend, and they will be reported in more detail next progress report.
 
+				</li>
+			</ul>
+
+			<!-- Week 7 -->
+			<h4>Week 7:</h4>
+            <b>Date:</b> 10/03/2021<br>
+            <b>Total hours:</b> 34 hours<br>
+            <b>Description of design efforts:</b><br>
+			This week was a very long week, with lots of problems solved, and lots of progress made. Most of the notable progress would be the mechanical design of the brace itself, the layout for the DAqS PCB, and the gearbox design and fabrication.
+			All of these things alone took a considerable amount of time, and together they took up a huge chunk of my week.
+
+			<ul>
+				<li>
+					<b>Brace Design and CAD</b><br>
+					A lot of work needed to be done in order to get the mechanical base design figured out. After some work with Swagat, I was able to come up with a solid design that would accomodate both of our boards, the power switch, and be sized
+					appropriately for the user's arm. These constraints were taken into account while we were CADing the first preliminary design for the upper-arm section. The lower arm should be relatively easy since it is effectively just a mount to
+					the user's forearm. Due to some board layout issues, the board needed to be a bit longer than we were expecting, but that was okay, since the mechanical design was not set in stone, so we were able to stretch the length of the package
+					slightly to accomodate the longer board size. Each of the connectors needed to be accesible while the board was mounted in the package, except for the programming connector, so all of that was taken into account. Overall, this is a
+					very solid preliminary design and will definitely be refined over the next few weeks. A screenshot from the CAD model for the current brace assembly can be seen in Figure 16.
+
+					<!-- Figures -->
+					<li>
+						<figcaption>Figure 16. Partial Brace CAD Assembly</figcaption>
+						<img src="Team/progress/mrumple/img/week7/Brace_CAD.png" width="90%"></img>
+					</li>
+				</li>
+				<li>
+					<b>DAqS PCB Layout</b><br>
+					A majority of my time this week was spent working on this PCB. The number of components and rough space constraints made this PCB very densely packed, and I have only minor experience with PCB layout and design. After a couple restarts
+					of component placement, I was able to get something relatively well laid out, that was compact and isolated. We decided to have 3 separate ground planes, one for analog, one for digital, and one for power, which allowed us to connect
+					them in only one area, so we could have separate planes that would not create a ground loop. The Front and Back of the preliminary DAqS PCB layout can be seen in Figures 18 and 19 respectively. As seen in Figure 18, the board is split
+					into two sections, analog and digital, keeping the two planes separate. This PCB layout needs some refinement, which is where Swagat will come in and polish up the design since he is more experienced in electrical engineering. This board
+					ended up being larger than our original constraints, but we decided it was best not to push the limits, but rather give ourselves some breathing room.
+					
+					<!-- Figures -->
+					<ul>
+						<li>
+							<figcaption>Figure 18. Front of the DAqS PCB</figcaption>
+							<img src="Team/progress/mrumple/img/week7/DAqS_PCB_Front.png" width="75%"></img>
+						</li>
+						<li>
+							<figcaption>Figure 19. Back of the DAqS PCB</figcaption>
+							<img src="Team/progress/mrumple/img/week7/DAqS_PCB_Back.png" width="75%"></img>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<b>24:5 Gearbox Design and Fabrication</b><br>
+					Lastly, the gearbox was almost completed, with the exception of a few minor adjustments. We now have a working 24:5 gear reduction for our stepper motor that will increase both the haptic feedback as well as the energy harvesting.
+					This gear reduction should be un-noticable to anyone wearing the device, since the starting torque of the stepper is so small, but it will hopefully create a more noticeable haptic feedback when the motor is shorted, as well as
+					spinning the motor more times to generate more back EMF to harvest. Since we created our own gearbox, we were able to make it assymetric to load some of the weight of the stepper back about 20 mm from the elbow joint, hopefully
+					increasing the comfortability of our device. It is also relatively compact when compared to other gerabox options, which means that our system can have a lower profile than if we were forced to use a pre-made gerabox. Although it
+					seemed like a difficult challenge at first, it only took a little CAD knowledge and some tolerancing to acheive something that will improve our project greatly. Also, just in case the gerabox fails for some reason, we decided to
+					make the mounting holes for the box the exact same as a stepper, so the two would be interchangable.
+
+					<!-- Figures -->
+					<ul>
+						<li>
+							<figcaption>Figure 20. CAD of Gearbox Assembly</figcaption>
+							<img src="Team/progress/mrumple/img/week7/Gearbox_CAD.png" width="90%"></img>
+						</li>
+						<li>
+							<figcaption>Figure 21. Picture of Prototype Design</figcaption>
+							<img src="Team/progress/mrumple/img/week7/Gearbox_Photo.jpg" width="90%"></img>
+						</li>
+					</ul>
 				</li>
 			</ul>
 			<!-- <img src="Files/img/week2/cad_drawing.png"></img> -->

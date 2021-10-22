@@ -185,7 +185,37 @@ contact course staff.
 	Lastly, I worked on starting the software formalization for next week. 
 	This week I worked on collecting information for all of our third-party software libraries and laying out our testing plan for each chip and unti testing for the drivers. 
 	I believe that most of testing will surround the IMU data collection and BLE dropped connection handling.<br>
-</br> 
+</br>
+	<br>
+		<h4>Week 7:</h4>
+		<b>Date: </b> 10/8<br>
+		<b>Total hours: </b> 20<br>
+		<b>Description of design efforts: </b><br>
+	<br>
+	This week was fast paced with a lot of great progress toward laying out the full product on the breadboard. 
+	At the end of this week, I had three major achievements: Software Formalization/Planning, Completing the breadboard layout, and sending packets over Bluetooth between two chips.
+	<br>
+	<br>
+	This accomplishment of the week was the Bluetooth communication between two BLE chips (One in central mode and one in peripheral mode). 
+	This is a big step toward communicating with the computer over Bluetooth since both ends were being commanded by an MCU for now. 
+	The issue I learned was that the RN4020 BLE chip required an extra hardware signal to flip it into the MLDP mode and begin transmitting and receiving data as opposed to CMD mode which allows the user to configure the chip
+	This revelation allowed me to communicate between an Arduino and the STM with two BLE chips in-between.
+	<br>
+	<br>
+	The second accomplishment of the week was the completion of the breadboard layout with the corresponding code for individual portions of the project. 
+	I was finally able to layout all the ICs, potentiometer, and LEDs on one board and test portions separately pictured below.
+	This step also allowed me to finish the pinout description for the STM, pictured below, which needed to be finalized for the PCB.
+	The next step will be integrating each portion together and ensuring nothing breaks. 
+	<br>><img src="Team/progress/ihagedorn/img/breadboard2.jpg" style="width:65%;height:50%;"><br>
+	<br>><img src="Team/progress/ihagedorn/img/pinout.png" style="width:65%;height:50%;"><br>
+	<br>
+	The last achievement of the week was the Software Formalization and Planning.
+	I feel very comfortable with the testing plan that I laid out for each portion of the project and the development yet to come.
+	Additionally, within this document I characterized each software component, its role, and plans for development internally/externally. 
+	<br>
+	<br>
+	Next week is Fall Break and design reviews and I will look to work on preparing for that along with continuing development on packet structures and improving communication for Bluetooth.
+ <br>
              
         </div>
 	
