@@ -410,6 +410,48 @@ contact course staff.
 				</li>
 			</ul>
 			<!-- <img src="Files/img/week2/cad_drawing.png"></img> -->
+
+			<!-- Week 9 -->
+			<h4>Week 9:</h4>
+			<b>Date:</b> 10/17/2021<br>
+			<b>Total hours:</b> 24 hours<br>
+			<b>Description of design efforts:</b><br>
+			This week was a mixture of PCB verification, mechanical design, and software design. There was a lot of progress made this week, so we were able to start acheiving some of our goals. Obviously the biggest goal is going to be integration, but 
+			I think that we made major progress towards our big goals and are well on our way with getting our project done.
+
+			<ul>
+				<li>
+					<b>New Gearbox Design</b><br>
+					After playing around with our approximate 5:1 gearbox, we realized that there was some major slippage in the stepper motor when full breaking torque was applied. In order to mitigate this slipage and to give the user the best experience
+					possible, we decided to reduce our gear ratio to approximate 3.5:1. This new gearbox was also more robust and well made that the previous one, including the way that the stepper gear was pressed onto the stepper motor shaft. We also 
+					changed around several different motors until we found one that felt good while receiving haptic feedback. This turned out the be the motor with the least coil resistance, which was smaller and lower-profile, which I liked. A nice and
+					good looking render can be found below in figure 22.
+
+					<!-- Figures -->
+					<li>
+						<figcaption>Figure 22. Final Gearbox Render</figcaption>
+						<img src="Team/progress/mrumple/img/week9/gearbox_render.png" width="60%"></img>
+					</li>
+				</li>
+				<li>
+					<b>DAqS PCB Completion and HBmS Testing</b><br>
+					In addition to the mechanical work, there was a lot of hardware testing that needed to be done. We have prototyped everything needed for the DAwS system, and once it was approved by the course staff, we ordered that PCB. In regards to
+					the HBmS system, we have been completing testing and everything seemed good except the LiPo chargin circuit. This was the only parat of the board that was not prototyped, so we have definitely learned our lesson there. The charging
+					chip we chose was not meant for our specific application, and it would never work well in our system. We have tested other LiPo charging chips from the parts shop and have found a suitable replacement. Unfortunately, this is not a drop
+					in replacement, so we can't just swap the chips. It looks like we will need to order a new HBmS board. Fortunately for us, we ordered this board way ahead of time so we have time to re-implement the charging chip and test our board before
+					integration needs to be done.
+					
+				</li>
+				<li>
+					<b>IMU & Sensor Fusion Testing</b><br>
+					Over the past few days, I have been having conversations with Zach about the IMU and sensor fusion algorithm. With Unity help from me and some C# research on his own, he was able to integrated a Madgwick Sensor fusion algorithm from the
+					open source code provided by the man who created it. Unfortunately, there seems to be an issue with the yaw of the IMU orientation fusion (discussed in his progress report this week). If he is unable to figure things out before he goes
+					home this weekend, I will probably back track and try to run the sensor fusion code (implemented in C) on an arduino and see if I can get that to work. I have a feeling there is some fatal flaw somewhere in the integration that is not
+					implemented correctly, and therefore is causing this issue.
+				</li>
+			</ul>
+
+
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->

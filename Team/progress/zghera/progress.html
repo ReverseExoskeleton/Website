@@ -623,6 +623,85 @@ contact course staff.
 			</p>
 			<br>
 
+			<h4>Week 9</h4>
+			<p>
+				<b>Date:</b> 10/22<br>
+				<b>Total hours:</b> ~15 hours<br>
+				<b>Description of design efforts:</b><br>
+				This week was focused on getting the upper arm orientation vector using
+				the Madgwick filter. 
+				<br>
+				I was able to get the Madgwick filter working for rotations in the roll
+				and pitch axis (z and x in Unity) but am having problems with getting the
+				yaw rotation (See Fig. 14 and Fig. 15).
+				<br><br>
+				<iframe width="500" height="400"
+					src="https://www.youtube.com/embed/D6xg75PiZW0">
+				</iframe>
+				<br>Fig. 14: Unity Madgwick Prototyping Screenshare
+				<br><br>
+				<iframe width="500" height="400"
+					src="https://www.youtube.com/embed/BodKs3Jfh3A">
+				</iframe>
+				<br>Fig. 15: Unity Madgwick Prototyping with IMU in Recording
+				<br><br>
+				The high-level steps I took to implement the Madwick filter demo in Unity
+				are:
+				<ol>
+					<li>Create a DLL for the 
+						<a href="https://github.com/xioTechnologies/Fusion">
+							official Madgwick implementation</a>.
+					</li>
+					<li>Consuming the native Madgwick and creating an API in C#.</li>
+					<li>Porting the
+						<a href="https://github.com/xioTechnologies/Fusion/blob/master/Examples/ExampleAhrs.c">
+							9-DOF AHRS example
+						</a>
+						to C#.</li>
+					<li>Create a basic unity scene to visualize the Quaternion output.</li>
+				</ol>
+				Each of these steps required a good amount of learning as I have not
+				worked with DLLs and have limited experience with Unity.
+				<br>
+				That being said, while I was partially successfull, I have yet to been
+				able to figure out why yaw is not captured in the Quaternion output of
+				the filter. Here are a few things I have done so far to debug:
+				<ol>
+					<li>Ensure that the IMU Arduino library does the propper
+						calibration and scaling of the raw sensor values.
+					</li>
+					<li>Created an scene based on the Fusion library's 
+						<a href="https://github.com/xioTechnologies/Fusion/blob/master/Examples/ExampleCompass.c">
+							compass example</a>
+						to confirm that it was not an error in the AHRS update function.
+						<br>
+						<i>I found the same results as I did with the AHRS example (i.e.
+						the yaw angle did not change).</i> 
+					</li>
+					<li>Add logging to the initial implementation to see where the
+						z axis of the Quaternion is not being updated upon rotation (e.g.
+						after initialization, after integration, etc.).
+						<br>
+						<i>I did not see any obvious errors in these logs that would indicate a
+						particular expression is causing an issue.</i>
+					</li>
+					<li> Replaced the Madgwick DLL C# API with the 
+						<a href="https://github.com/xioTechnologies/Open-Source-AHRS-With-x-IMU">older C# implementation</a>
+						from the same company (x-io technologies).
+						<br>
+						<i>This gave the same results as the C-based Fusion library.</i>
+					</li>
+					<li>Currently implementing the Madgwick impelementation entirely on 
+						our Arduino Due to verify it is not an issue with the DLL creation
+						or my C# API.
+				</ol>
+				For more details regarding the issues I am having and areas of potential
+				confusion, please see the
+				<a href="https://github.com/xioTechnologies/Fusion/issues/18">GitHub issue</a>
+				that I opened on the official Madgwick implementation repo.
+			</p>
+			<br>
+
 			<br>
 		</div>
 	

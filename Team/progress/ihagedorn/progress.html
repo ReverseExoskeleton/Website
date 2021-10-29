@@ -216,7 +216,24 @@ contact course staff.
 	<br>
 	Next week is Fall Break and design reviews and I will look to work on preparing for that along with continuing development on packet structures and improving communication for Bluetooth.
  <br>
-             
+ 	<br>
+		<h4>Week 9: </h4>
+		<b>Date: </b> 10/22<br>
+		<b>Total hours: </b> 12<br>
+		<b>Descritpion of design efforts: </b><br>
+	<br>
+	These past couple weeks our team successfully completed the design review and placed our order for our PCBs. 
+	In addition to helping with PCB planning and finalization/verification, I also worked on integrating some of the larger chunks of the project together including working out the timing operations for our timer interrupts with sampling values and coordinating communication as well as general interrupts for reading and writing using DMA. 
+	In addition to this development, I finalized integrated testing on my end of sampling the IMU over SPI, transmitting the data over UART to the BLE chip and outputting the data over the air to another BLE chip in order to simulate over the air transmission of IMU data to the host computer. 
+	I now need to work on a reliable connection between the host computer and the BLE chip as well as continuing development of the Bluetooth packet structures with Zach.
+	Currently the BLE chip is able to reliably advertise itself to similar BLE chips, but there are issues with reliably finding the advertising device on a PC and establishing a connection that does not falter. 
+	Our current discussion of the packet structure is best summarized by the image below with the idea of moving all possible data processing over to the host computer and only collecting raw data on the MCU. 
+	<br>><img src="Team/progress/ihagedorn/img/packet.png" style="width:65%;height:50%;"><br>
+     	<br>
+	In addition to continuing BLE development with Zach, I anticipate that next week I will also be qorking with Swag and Matthew to test the haptic feedback capabilities and begin training our ADC and PWM tables with realistic values.
+	Currently the ADC and PWM periphreals have verified functions for reading values from the ADC and creating a feedback loop that updates the PWM via DMA. 
+	This configuration will need to be altered to more closely allign with the final intended design.
+<br>        
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
