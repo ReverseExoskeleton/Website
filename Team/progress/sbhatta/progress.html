@@ -358,23 +358,56 @@ contact course staff.
             <b>Date:</b> 10/22/2021<br />
             <b>Total hours:</b> 5 hours<br />
             <b>Description of design efforts:</b><br />
-            This week, I debugged the HBmS PCB (our debugging setup is shown in Fig. 17). The PCB had one major problem: 
-            the LiPo charging circuit was not working as intended; the LiPo charger IC was keeping the battery isolated 
-            from the rest of the board unless I momentarily (manually) pulled the VDD pin of the IC high during startup. 
-            I believe that the charging chip is intended for more of a power source backup scenario; hence, the IC might 
-            need the primary source (USB power for example) to be present at startup before it can switch over to battery 
-            supply. This issue was particularly vexing because it was not mentioned in the datasheet. We are using an external 
-            battery-charging module as a workout for debugging and characterization. This module works well and should be simple 
-            to reverse-engineer into our design (perhaps as a patch). To keep with our timeline, we might implement quick fixes 
-            by jumping wires and adding a patch (and send out a final iteration after we debug our other board). All other HBmS 
-            systems are working nominally, and we are looking to do a full numerical characterization this weekend. The energy 
-            harvesting circuit is producing some haptic feedback, which will be measurable with our test setup but might not be 
-            noticeable by the user. When we do our characterization test, it will be interesting to see how the haptic energy 
+            This week, I debugged the HBmS PCB (our debugging setup is shown in Fig. 17). The PCB had one major problem:
+            the LiPo charging circuit was not working as intended; the LiPo charger IC was keeping the battery isolated
+            from the rest of the board unless I momentarily (manually) pulled the VDD pin of the IC high during startup.
+            I believe that the charging chip is intended for more of a power source backup scenario; hence, the IC might
+            need the primary source (USB power for example) to be present at startup before it can switch over to battery
+            supply. This issue was particularly vexing because it was not mentioned in the datasheet. We are using an external
+            battery-charging module as a workout for debugging and characterization. This module works well and should be simple
+            to reverse-engineer into our design (perhaps as a patch). To keep with our timeline, we might implement quick fixes
+            by jumping wires and adding a patch (and send out a final iteration after we debug our other board). All other HBmS
+            systems are working nominally, and we are looking to do a full numerical characterization this weekend. The energy
+            harvesting circuit is producing some haptic feedback, which will be measurable with our test setup but might not be
+            noticeable by the user. When we do our characterization test, it will be interesting to see how the haptic energy
             harvesting and haptic feedback circuits interact in terms of net power draw/generation and net braking.
 
             <p></p>
             <img src="Team/progress/sbhatta/img/week9/Debugging.png" width="60%" /></img>
             <figcaption>Fig. 17: HBmS debugging setup.</figcaption>
+            <br />
+
+            <!-- Week 10 -->
+            <h4>Week 10:</h4>
+            <b>Date:</b> 10/29/2021<br />
+            <b>Total hours:</b> 15 hours<br />
+            <b>Description of design efforts:</b><br />
+            This week, I did the “legal analysis.” In terms of design work, I found a suitable single-cell LiPo charging chip
+            and patched it to the HBmS V1 PCB (see Fig. 18). There were a few changes with the energy harvesting circuit: we
+            now dump the current from our boost converter to the input of our buck converter via a resistor and diode since our
+            new LiPo charging chip takes a long time to initiate the charging process (compared to the on-time of the boost
+            converter as the motor shaft is moving). In this way, we use our harvested energy almost immediately, not storing
+            it in the battery. We did a full integration test and found that the HBmS was self-powering below ~10% relay duty
+            cycle (we think we can do better). Overall, the HBmS draws below 2 mW. Fig. 19 shows the large vibrations created
+            by our system and Fig. 20 shows the mean viscous coefficient vs. relay duty cycle. Unfortunately, we found out that
+            nothing really worked anymore just as we were about to proudly demo our system on Wednesday. After four hours of
+            debugging and testing several hypotheses, we found out that we had left large pools of flux residue on our board overnight,
+            which had absorbed moisture and had started shorting the fine-pitched pins of our JST connector (we were measuring ~80 Ohm
+            between adjacent pins). After rinsing our board properly (courtesy of Joe), everything started working again (we still measure
+            ~100 KOhm between adjacent pins). We recollected the system integration data since we do not know how each subsystem was affected
+            by the residue. The things that I am planning to accomplish this weekend are: (1) soldering the DAqS (2) plotting new HBmS data (3)
+            updating the HBmS schematic/layout and ordering the updated board (4) soldering and testing the potentiometer board.
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week10/Patch.png" width="60%" /></img>
+            <figcaption>Fig. 18: Backside of HBmS V1 with patch visible.</figcaption>
+            <br />
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week10/Acceleration.png" width="60%" /></img>
+            <figcaption>Fig. 19: Visualization of the linear acceleration generated by our haptic feedback system on a 500 g mass (as inferred from a rotary encoder).</figcaption>
+            <br />
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week10/Duty.png" width="60%" /></img>
+            <figcaption>Fig. 20: Terminal velocity and viscous coefficient vs. duty cycle; nonlinearity is hypothesized to be caused by rotor slippage.</figcaption>
             <br />
 
         </div>
