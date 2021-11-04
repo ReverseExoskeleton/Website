@@ -206,8 +206,8 @@ contact course staff.
 	I was finally able to layout all the ICs, potentiometer, and LEDs on one board and test portions separately pictured below.
 	This step also allowed me to finish the pinout description for the STM, pictured below, which needed to be finalized for the PCB.
 	The next step will be integrating each portion together and ensuring nothing breaks. 
-	<br>><img src="Team/progress/ihagedorn/img/breadboard2.jpg" style="width:65%;height:50%;"><br>
-	<br>><img src="Team/progress/ihagedorn/img/pinout.png" style="width:65%;height:50%;"><br>
+	<br><img src="Team/progress/ihagedorn/img/breadboard2.jpg" style="width:65%;height:50%;"><br>
+	<br><img src="Team/progress/ihagedorn/img/pinout.png" style="width:65%;height:50%;"><br>
 	<br>
 	The last achievement of the week was the Software Formalization and Planning.
 	I feel very comfortable with the testing plan that I laid out for each portion of the project and the development yet to come.
@@ -228,12 +228,39 @@ contact course staff.
 	I now need to work on a reliable connection between the host computer and the BLE chip as well as continuing development of the Bluetooth packet structures with Zach.
 	Currently the BLE chip is able to reliably advertise itself to similar BLE chips, but there are issues with reliably finding the advertising device on a PC and establishing a connection that does not falter. 
 	Our current discussion of the packet structure is best summarized by the image below with the idea of moving all possible data processing over to the host computer and only collecting raw data on the MCU. 
-	<br>><img src="Team/progress/ihagedorn/img/packet.png" style="width:65%;height:50%;"><br>
+	<br><img src="Team/progress/ihagedorn/img/packet.png" style="width:65%;height:50%;"><br>
      	<br>
 	In addition to continuing BLE development with Zach, I anticipate that next week I will also be qorking with Swag and Matthew to test the haptic feedback capabilities and begin training our ADC and PWM tables with realistic values.
 	Currently the ADC and PWM periphreals have verified functions for reading values from the ADC and creating a feedback loop that updates the PWM via DMA. 
 	This configuration will need to be altered to more closely allign with the final intended design.
-<br>        
+<br>    
+	<br>
+                <h4>Week 10: </h4>
+                <b>Date: </b> 10/29<br>
+                <b>Total hours: </b> 19<br>
+                <b>Descritpion of design efforts: </b><br>
+        <br>
+
+	This week I finished the timer and interrupts integration for sampling the IMU and ADC and configuring the PWM. 
+	The code is configurable to adjust the frequency of sampling and frequency of adjusting the PWM for further testing and profiling of the affects each frequency has on the system as a whole. 
+	I also still need to figure out the correct priorities for each of the interrupts in order to prevent interrupts from bringing down the entire system. 
+	<br>
+	<br>
+	In conjunction the finalized development of the timer configuration and interrupt code, Zach and I were finally able to setup testing for communication between the BLE chip and host computer. 
+	This breakthrough included finally resolving the discoverability issue and setting up a service with characteristics for a subscriber to read and write from. 
+	The discoverability issue we found out had to do with the name of the device being too long for its advertisement packet which caused frequent drops in advertisement. 
+	This is a really weird error because even the factory default name is too long and causes issues. 
+	<br>
+	<br><img src="Team/progress/ihagedorn/img/BLE_trans.png" style="width:85%;height:115%;"><br>
+	Image of communication between host and MCU
+	<br>
+	<br>
+	Now that Zach and I are finally able to connect and communicate, we attempted to start integration testing between our two systems, my sampling and data delivery with his data collection and processing, to see if we could recreate what Zach had been doing with the Arduino and Unity in weeks prior. 
+	However, we seem to be having some issues with packaging the data correctly before transmission so that Zach receives the values in the correct format.
+	<br>
+	<br>
+	After we finish this integrated test, we will still need to work on data transmission in the reverse direction and finally configuring our lookup tables for the DMA to find intelligent values instead of converting and ADC percentage. 
+<br>
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->

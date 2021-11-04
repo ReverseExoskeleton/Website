@@ -409,7 +409,6 @@ contact course staff.
 					</ul>
 				</li>
 			</ul>
-			<!-- <img src="Files/img/week2/cad_drawing.png"></img> -->
 
 			<!-- Week 9 -->
 			<h4>Week 9:</h4>
@@ -451,7 +450,46 @@ contact course staff.
 				</li>
 			</ul>
 
+			<!-- Week 10 -->
+			<h4>Week 10:</h4>
+			<b>Date:</b> 10/24/2021<br>
+			<b>Total hours:</b> 10 hours<br>
+			<b>Description of design efforts:</b><br>
+			This week I was manly focused on debugging the HBmS with Swagat, aiding Zach and Isaac with Bluetooth integration, and finalizing some more mechanical design elements. My overall knowledge of every aspect of this project will help significantly
+			when it comes time to put everything together for integration testing. A lot of mechanical design has already been done, but there are definitely some challenges in the near future. Specifically, I still need to design the lower arm piece, as
+			well as the top plate for the package, which will be used to protect the internal components of our project as well as mount the stepper motor and potentiometer to our apparatus.
 
+			<ul>
+				<li>
+					<b>HBmS Debugging and Flywiring</b><br>
+					The HBmS is now correctly equipped with a battery charger that will work correctly for our implementation and is for a single-cell LiPo. This will allow for USB charging when the device is plugged in, and energy harvesting charging while
+					the device is in use. We needed to recharacterize the 3.5:1 gearbox as well as make sure the board was operational, so we mounted everything to an acrylic sheet and began testing by dropping a 500g mass attached to the flywheel. The data
+					has since been collected and is currently be analyized by Swagat. This setup also allowed me to test many of the mechanical attachment points that our design will be using in it's final prototype. We had a small issue with the V_PWM signal
+					causing a short on the board, which we determined to be caused by residual flux shorting VCC and V_PWM, which was taken care of. More care will be taken to elimate issues like this in the future.
+
+					<!-- Figures -->
+					<li>
+						<figcaption>Figure 23. New HBmS Characterization and Testing Setup</figcaption>
+						<img src="Team/progress/mrumple/img/week10/HBmS_Setup.jpg" width="60%"></img>
+					</li>
+				</li>
+				<li>
+					<b>Bluetooth and IMU Sensor Integration</b><br>
+					One of the most important aspects of our device is it's ability to communicate wirelessly to the host computer running the VR simulation. For this we needed to get Bluetooth working so that the RN4020 could pair with the host computer.
+					After Isaac and Zach had their separate components working, they met up at our apartment to test the integration, after they struggled for a bit I came in and provided some guidance on debugging. After a little while, we were able to 
+					get the host computer to pair with the RN4020 and it could subscribe to characteristics inside of our RevEx GATT service. Then we were able to trade data back and forth, allowing for truly wireless communications to be established. This
+					was ver exciting because this was a major basis for our project. After some more discussion we made decisions on how we wanted to setup our GATT service and characteristics and what the structure of that may look like.
+					
+				</li>
+				<li>
+					<b>Mechanical Design</b><br>
+					Some new mechanical design elements were figured out during this week as well. We have our last digikey order coming in soon that contains our center-spaced potentiometer. So I finished designing the 1-layer PCB that the pot would mount to
+					and Swagat got it milled in the parts shop. The turn around was extremely quick which I was happy about. Unfortunately, the center-spaced pot was too wide to use the standard stepper mounting holes, so I had to change the design to use a 3
+					hole pattern spaced outside the preimeter of the pot. Although this was an unforseen issue, it won't be super hard to fix, just requires a new mounting plate for the gearbox, and in case of gearbox failure, we would need to utilize a plate 
+					to attach the stepper to the rest of the apparatus.
+
+				</li>
+			</ul>
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->

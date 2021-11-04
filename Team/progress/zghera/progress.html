@@ -702,6 +702,89 @@ contact course staff.
 			</p>
 			<br>
 
+
+
+			<h4>Week 10</h4>
+			<p>
+				<b>Date:</b> 10/22<br>
+				<b>Total hours:</b> ~15 hours<br>
+				<b>Description of design efforts:</b><br>
+				My efforts this week were focused on two software subsystems:
+				sensor fusion and bluetooth communication.
+				<br>
+				<h5>Sensor Fusion</h5>
+				I picked up where I left off last week: determining and fixing the sensor fusion
+				algorithm yaw sensitivity.
+				<br><br>
+				Matthew graciously helped me run a few experiments to 
+				help narrow down the source of the bug. More specifically, he tried running a
+				C# implementation of the Mahony filter from the same authors as the
+				official C implementation. There were a few problems with these implementations as
+				there were dependencies on DLLs where they did not provide the original source. Additionally,
+				the last time this code was updated was 8 years ago whereas the latest verison was updated
+				3 years ago. Needless to say, these re-implementations had large issues with drift.
+				Matthew also tried to re-implemented the Madgwick filter himself from scratch in C#.
+				Unfortunately, this was also unsuccessful due as he did not have much time to dedicate to
+				debugging.
+				<br><br>
+				I tried running the original C library on the Arduino to see if there was an issue with 
+				corruption over communication, or more likely, a bug in my DLL. However, I was unable to
+				flash the Arduino with my new code for some reason (I later figured out it was Because
+				I forgot to re-install Invensense tools with my new install). So I moved back into
+				my DLL C# API to try to fix the issue.
+				<br><br>
+				I do not remember all of the details that led up to the final realization. But at some
+				point while experimenting with different changes to usage of the Madgwick library, I
+				used the raw accelerometer and gyroscope values (received over serial) rather than calling
+				the calibration functions in the library. This made the output sensitive to changes
+				in yaw!!! I believe this was because these sensors were already calibrated by the
+				arduino library we use and somehow the repeated calibration led to attenuating the z axis
+				of the quaternion. Once I experimentally found the hard iron bias, I had something that 
+				worked nearly as expected!!
+				<br><br>
+				There were two other major changes that I made to improve upon this discovery and result in
+				the demo video in Fig. 16.:
+				<ol>
+					<li><b>Stationary yaw drift</b>
+						<br>
+						There was small drift in the yaw axis. I found that the library did have a gyro bias
+						correction function. However, the threshold to be considered 'stationary' and the time
+						before the correction algorithm activated was a long time (5 sec). After correcting these
+						two parameters, the yaw drift was drastically minimized. However, there is still some
+						stationary yaw drift. I plan to modify the algorithm to record the yaw angle once stationary
+						to more aggressively correct any drift.
+					</li>
+					<li><b>IMU data tx / rx speeds</b>
+						<br>
+						I thought that I had corrected the Arduino to transmit at the same speed as the update
+						rate of Unity. However, I had been doing testing on my monitor. When testing on my
+						laptop screen, the tx and rx rates no longer matched up and the packet queue was 
+						becoming full. My original solution to that was not great as I would throw away one packet
+						at a time when it would become full. This led to a major lag between when I would move
+						the IMU and when I would see the change on the screen. To fix this, Unity now consumes
+						all of the packets waiting in the queue on each update to mitigate this issue. 
+					</li>
+				</ol>
+				<br>
+				<iframe width="500" height="400"
+					src="https://www.youtube.com/embed/sWjhQOD6EGs">
+				</iframe>
+				<br>Fig. 16: Unity Madgwick Prototyping with IMU in Recording
+				<br><br>
+				<h5>Bluetooth Communication</h5>
+				I worked with Isaac this week to get bluetooth communication working. Luckily, the BLE DLL
+				I found on GitHub had a demo that worked very well once I worked with Isaac to debug
+				GATT service creation issues on his side.
+				<br>
+				Once we resolved the bugs, I was able to connect to the Rev device and then subscribe to a
+				specific GATT service where he send me the raw IMU data (See Fig. 17).
+				<br><br>
+				<img src="Team/progress/zghera/img/week10/ble-integration-demo.jpg" style="width:85%;height:85%;">
+				<br>Fig. 17: Unity BLE Communication Demo.
+				<br>
+			</p>
+			<br>
+
 			<br>
 		</div>
 	
