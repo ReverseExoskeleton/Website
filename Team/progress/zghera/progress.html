@@ -703,7 +703,6 @@ contact course staff.
 			<br>
 
 
-
 			<h4>Week 10</h4>
 			<p>
 				<b>Date:</b> 10/22<br>
@@ -781,6 +780,36 @@ contact course staff.
 				<br><br>
 				<img src="Team/progress/zghera/img/week10/ble-integration-demo.jpg" style="width:85%;height:85%;">
 				<br>Fig. 17: Unity BLE Communication Demo.
+				<br>
+			</p>
+			<br>
+
+
+			<h4>Week 11</h4>
+			<p>
+				<b>Date:</b> 10/22<br>
+				<b>Total hours:</b> ~4 hours<br>
+				<b>Description of design efforts:</b><br>
+				I was unable to make much progress this week due to an unexpected
+				health emergency that incapacitated me for much of the week.
+				<br><br>
+				The time that I did spend on the project was focused on creating the
+				Unity project that the final VR simulation will live. This meant
+				refactoring my prototyping to enable easier debugging (e.g. Logger
+				class), testing (e.g. Tranceiver interface to easily change based on
+				whether we are using BLE vs serial to get data) and general extensibility
+				/ maintainability.
+				<br><br>
+				One noteworthy change is for decoding the IMU data included in the sensor
+				packets. Previously, we were sending 16-bit values that represented scaled
+				floating points. This required 3rd party code for encoding and decoding on
+				the MCU and host respectively. Instead of this, Isaac and I agreed that the
+				MCU should instead send the raw 16-bit integer to the host where the host
+				can simply case to a float and scale the values based on the configuration
+				values for the IMU sensors (see Fig. 18).
+				<br><br>
+				<img src="Team/progress/zghera/img/week11/imu-sample-decode.jpg" style="width:85%;height:85%;">
+				<br>Fig. 18: New IMU Sample Decoding Scheme (C# Code).
 				<br>
 			</p>
 			<br>

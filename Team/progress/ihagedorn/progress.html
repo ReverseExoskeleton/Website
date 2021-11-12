@@ -261,6 +261,35 @@ contact course staff.
 	<br>
 	After we finish this integrated test, we will still need to work on data transmission in the reverse direction and finally configuring our lookup tables for the DMA to find intelligent values instead of converting and ADC percentage. 
 <br>
+	 <br>
+                <h4>Week 11: </h4>
+                <b>Date: </b> 11/5<br>
+                <b>Total hours: </b> 14<br>
+                <b>Descritpion of design efforts: </b><br>
+        <br>
+	
+	This week was a heavy amount of integration and testing on the fully populated PCB, pictured below. 
+	Over the course of the week, I worked on testing out the power operations, programming headers, soldering testing points, and confirming induvial chip operations on the PCB. 
+	This testing included ensuring communication between the MCU and IMU, ensuring the boot sequence operation on the BLE chip, polling values from the ADC to graph through Arduino, and generating PWM signals. 
+	All in all, we were able to achieve three of the tasks of the system bring up and are close to achieving the fourth.
+	<br><img src="Team/progress/ihagedorn/img/PCB1.jpg" style="width:50%;height:65%;"><br>
+	<img src="Team/progress/ihagedorn/img/PCB2.jpg" style="width:50%;height:65%;"><br>
+	<br>
+	The first task I achieved was communication with the IMU. 
+	For this I first had to configure the IMU chip for SPI mode over I2C and then tapped into the 4 SPI lines to watch how the chips handled a simple who_am_I request. 
+	After observing the correct oscilloscope behaviors, I tapped into the UART lines from the MCU and polled IMU data to be printed over UART to an Arduino serial plotter. 
+	<br>
+	<br>
+	The second task I achieved was generating a PWM signal of varying duty cycles that controlled the haptic feedback circuit. 
+	This was just a matter of transferring over the code from the dev board and ensuring that signal was as expected on the oscilloscope before hooking up the sensitive haptic feedback circuit. 
+	<br>
+	<br>
+	The third task I achieved was reading ADC values from the potentiometer and mapping the data over UART to an Arduino serial plotter similar to task one. 
+	With this third task complete we should have completed three of our preliminary PSSCs and are ready to start introducing timing and power consumption efficiency into the equation.
+	<br>
+	<br>
+	The fourth task which is still to be completed over the weekend is confirming that boot sequence is received correctly by the BLE chip and the configurations are correct on the chip.
+
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
