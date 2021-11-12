@@ -410,31 +410,50 @@ contact course staff.
             <figcaption>Fig. 20: Terminal velocity and viscous coefficient vs. duty cycle; nonlinearity is hypothesized to be caused by rotor slippage.</figcaption>
             <br />
 
-             <!-- Week 11 -->
-             <h4>Week 11:</h4>
-             <b>Date:</b> 11/04/2021<br />
-             <b>Total hours:</b> 18 hours<br />
-             <b>Description of design efforts:</b><br />
-             This week, I soldered the DAqS board with assistance from Matthew. Our full-system integration test setup is shown in Fig. 21.
-             <p></p>
-             <img src="Team/progress/sbhatta/img/week11/Setup.png" width="40%" /></img>
-             <figcaption>Fig. 21: Full system integration test setup.</figcaption>
-             <br />
-             Testing of the DAqS board is ongoing. Currently, we know we can do the following with our board: (1) program our MCU (2) output a PWM signal to generate haptic feedback (3) generate significant motion interrupt pulses with the analog event detector and (4) communicate with our IMU. For some time, we were not able to communicate with our IMU at all, so we took it for an x-ray (see Fig. 22).
-             <p></p>
-             <img src="Team/progress/sbhatta/img/week11/Xray.png" width="50%" /></img>
-             <figcaption>Fig. 22: X-ray of our PCB around the IMU chip.</figcaption>
-             <br />
-             From the x-ray it looked like our chip was soldered correctly. We realized that the issue lay not with the solder joints but rather the code (see Isaac’s progress report), and we promptly resolved the issue. Our previous analog potentiometer ended up having strange discrete segments not shown on the datasheet (we found this out on Saturday). We have resolved our potentiometer issue quickly with a new potentiometer and board (see Fig. 23).
-             <p></p>
-             <img src="Team/progress/sbhatta/img/week11/Pot.png" width="50%" /></img>
-             <figcaption>Fig. 23: Potentiometer board.</figcaption>
-             <br />
-             We are looking to continue integration tests and get our Bluetooth and ADC working. I have ordered a new HBmS board (it should arrive sometime next week) that should resolve the fly wiring that we had to do with the LiPo charging circuit on the first version. The schematic of the new HBmS board is shown in Fig. 24.
-             <p></p>
-             <img src="Team/progress/sbhatta/img/week11/HBmS.png" width="100%" /></img>
-             <figcaption>Fig. 24: HBmS V2 schematic.</figcaption>
-             <br />
+            <!-- Week 11 -->
+            <h4>Week 11:</h4>
+            <b>Date:</b> 11/04/2021<br />
+            <b>Total hours:</b> 18 hours<br />
+            <b>Description of design efforts:</b><br />
+            This week, I soldered the DAqS board with assistance from Matthew. Our full-system integration test setup is shown in Fig. 21.
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week11/Setup.png" width="40%" /></img>
+            <figcaption>Fig. 21: Full system integration test setup.</figcaption>
+            <br />
+            Testing of the DAqS board is ongoing. Currently, we know we can do the following with our board: (1) program our MCU (2) output a PWM signal to generate haptic feedback (3) generate significant motion interrupt pulses with the analog event detector and (4) communicate with our IMU. For some time, we were not able to communicate with our IMU at all, so we took it for an x-ray (see Fig. 22).
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week11/Xray.png" width="50%" /></img>
+            <figcaption>Fig. 22: X-ray of our PCB around the IMU chip.</figcaption>
+            <br />
+            From the x-ray it looked like our chip was soldered correctly. We realized that the issue lay not with the solder joints but rather the code (see Isaac’s progress report), and we promptly resolved the issue. Our previous analog potentiometer ended up having strange discrete segments not shown on the datasheet (we found this out on Saturday). We have resolved our potentiometer issue quickly with a new potentiometer and board (see Fig. 23).
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week11/Pot.png" width="50%" /></img>
+            <figcaption>Fig. 23: Potentiometer board.</figcaption>
+            <br />
+            We are looking to continue integration tests and get our Bluetooth and ADC working. I have ordered a new HBmS board (it should arrive sometime next week) that should resolve the fly wiring that we had to do with the LiPo charging circuit on the first version. The schematic of the new HBmS board is shown in Fig. 24.
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week11/HBmS.png" width="100%" /></img>
+            <figcaption>Fig. 24: HBmS V2 schematic.</figcaption>
+            <br />
+
+            <!-- Week 12 -->
+            <h4>Week 12:</h4>
+            <b>Date:</b> 11/12/2021<br />
+            <b>Total hours:</b> 8 hours<br />
+            <b>Description of design efforts:</b><br />
+            This week, I soldered HBmS V2 and did preliminary tests on HBmS V2 (see Fig. 25). All systems are working as expected on HBmS V2
+            with no fly-wiring! This means HBmS V2 can (1) charge our lipo-battery while our main switch is on or off (with charging status indication)
+            (2) deliver haptic feedback by shorting motor coils (3) use back-emf to turn-on a boost converter, offsetting device power draw and (4) generate
+            2.5 V for the LDO inputs on the DAqS. So far, the DAqS has not shown major issues, although integration tests are ongoing (Fig. 26 shows our current integration testing setup).
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week12/HBmS.png" width="50%" /></img>
+            <figcaption>Fig. 25: HBmS V2 with battery charging.</figcaption>
+            <br />
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week12/Setup.png" width="50%" /></img>
+            <figcaption>Fig. 26: Current integration test setup.</figcaption>
+            <br />
+
 
         </div>
 	
