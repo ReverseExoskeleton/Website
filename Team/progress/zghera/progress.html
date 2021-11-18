@@ -705,7 +705,7 @@ contact course staff.
 
 			<h4>Week 10</h4>
 			<p>
-				<b>Date:</b> 10/22<br>
+				<b>Date:</b> 10/29<br>
 				<b>Total hours:</b> ~15 hours<br>
 				<b>Description of design efforts:</b><br>
 				My efforts this week were focused on two software subsystems:
@@ -784,10 +784,9 @@ contact course staff.
 			</p>
 			<br>
 
-
 			<h4>Week 11</h4>
 			<p>
-				<b>Date:</b> 10/22<br>
+				<b>Date:</b> 11/5<br>
 				<b>Total hours:</b> ~4 hours<br>
 				<b>Description of design efforts:</b><br>
 				I was unable to make much progress this week due to an unexpected
@@ -810,6 +809,41 @@ contact course staff.
 				<br><br>
 				<img src="Team/progress/zghera/img/week11/imu-sample-decode.jpg" style="width:85%;height:85%;">
 				<br>Fig. 18: New IMU Sample Decoding Scheme (C# Code).
+				<br>
+			</p>
+			<br>
+
+			<h4>Week 12</h4>
+			<p>
+				<b>Date:</b> 11/12<br>
+				<b>Total hours:</b> ~12 hours<br>
+				<b>Description of design efforts:</b><br>
+				This week I was able to spend a bit more time on senior design
+				as I started to gain control over the medical flare up near the end of
+				this week. My time was split around 60/40 between the environmental 
+				and individial ethical analysis assignment and host computer software
+				development, respectively.
+				<br><br>
+				The time I dedicated to host computer software development was focused
+				on creating the BLE trainceiver module. As the name suggests, this module
+				is responsible for connecting to, receiving, and transmitting data to
+				the BLE module on the RevEx wearable. <br>
+				This involved interfacing with the Windows BLE API using
+				<a href="https://github.com/adabru/BleWinrtDll">Adam Brunnmeier's BleWinrtDll</a>
+				. I was able to finish the components related to connection (to device
+				and GATT service), subscribing to the GATT characteristic,
+				and setting up the reader thread that constructs and adds incoming 
+				packets to the read queue (See Fig. 19 for a code snippit).
+				<br><br>
+				The only peice left is transmitting packets from the host computer
+				to the wearable. I plan to completing this before I return back to campus
+				this weekend so I can test Bluetooth capabilities with Isaac this next week.
+				<br><br>
+				<img src="Team/progress/zghera/img/week12/ble-trainceiver1.jpg" style="width:60%;height:60%;">
+				<img src="Team/progress/zghera/img/week12/ble-trainceiver2.jpg" style="width:60%;height:60%;">
+				<img src="Team/progress/zghera/img/week12/ble-trainceiver3.jpg" style="width:60%;height:60%;">
+				<img src="Team/progress/zghera/img/week12/ble-trainceiver4.jpg" style="width:60%;height:60%;">
+				<br>Fig. 19: Ble Tranceiver Implementation (C# Code).
 				<br>
 			</p>
 			<br>

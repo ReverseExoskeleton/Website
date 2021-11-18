@@ -490,52 +490,86 @@ contact course staff.
 
 				</li>
 			</ul>
+
+			<!-- Week 11 -->
+			<h4>Week 11:</h4>
+			<b>Date:</b> 10/31/2021<br>
+			<b>Total hours:</b> 20 hours<br>
+			<b>Description of design efforts:</b><br>
+			This week a lot of integration and debugging was done with our DAqS board. After receiving the board on Saturday, Swagat and I spent most of the day working on soldering it together and doing basic electrical testing. Thanks to Swagat's steady hand
+			and good soldering skills, we were able to complete the board by Saturday evening. Once the board was assembled, we also began digital testing over all the major components of the board. This allowed us to isolate and take care of problems one by one.
+
+			<ul>
+				<li>
+					<b>DAqS Board Completetion</b><br>
+					After a day's worth of work, we had completed the DAqS system assembly and had tested out some of the analog and voltage regulation circuits. The analog circuitry as well as the voltage refulation was in working order, which gave us confidence
+					in the rest of the board layout. The digital layouts were slightly less complicated than the analog layout, which is why it was important that the analog layout worked correctly. Overall, we are super happy that the DAqS system appears to be
+					mostly in working order. I will be talking about additional testing of the DAqS board in the following sections.
+
+					<!-- Figures -->
+					<li>
+						<figcaption>Figure 24. Assembled DAqS Board</figcaption>
+						<img src="Team/progress/mrumple/img/week11/Assembled_DAqS.jpg" width="60%"></img>
+					</li>
+				</li>
+				<li>
+					<b>On-Board IMU Debugging</b><br>
+					During the digital testing of the DAqS system, we were successfully able to program the micro, making me extremely happy. Once we were able to program the micro, we started debugging different chips, one at a time. We were actually able to check
+					off one of our preliminary PSSCs for generating haptic feedback using the DAqS and HBmS combined. After demonstrating that PSSC,  we attempted to communicate with the IMU to demonstrate yet another PSSC. Unfortunately, we were unable to get the
+					IMU to respond to our register reads because of an unknown issue. We inspected the solder job on the chip and attempted to determine the cause of the issue. After back tracking through some of the previous issues we had encountered, I remembered
+					that we needed to address the chip initially using I2C so that we could set it to default into SPI mode. I brought this to Isaac and he quickly bit-banged a I2C communication at the beginning of our init phase and it worked! I was very happy about
+					this since I did not want to have to solder the chip again.
+					
+				</li>
+				<li>
+					<b>Mechanical Layout Test</b><br>
+					As one of the last things before Friday, I was able to 3D print a "sillouhette" of our packaging to measure the mounting holes to make sure they fit correctly with the two boards. I also wanted to check cable distancing to make sure we had enough
+					cables that were the right length. The print turned out really great and we now have a pretty good looking test setup if I do say so myself. Next on mechanical design I'd like to finalize where the battery will be mounted, and determine the methods
+					at which we will be attaching the apparatus to the user's arm. I suspect that we will use a hybrid of elastic straps and velcro for achieving this on different sections of the arm. I forgot to take a picture of the setup, but I am leaving a spot for
+					the figure to be placed here, so when I do take a picture I can upload it.
+
+					<!-- Figures -->
+					<li>
+						<figcaption>Figure 25. Mechanical Test-Bench</figcaption>
+						<img src="Team/progress/mrumple/img/week11/mech_test.jpg" width="60%"></img>
+					</li>
+				</li>
+			</ul>
+
+			<!-- Week 12 -->
+			<h4>Week 12:</h4>
+			<b>Date:</b> 11/07/2021<br>
+			<b>Total hours:</b> 8 hours<br>
+			<b>Description of design efforts:</b><br>
+			Not a whole lot got done this week in terms of design progress, mostly due to pressure from other classes. In addition to the design progress, we were able to get two more PSSC's checked off. Lastly, we have been debating on what protocol to use for
+			on-board RN4020 Bluetooth chip. Some of the details of the progress this week can be read below.
+
+			<ul>
+				<li>
+					<b>Mechanical Design Progress</b><br>
+					There were several design considerations that wwere figured out during this first design session to finalize mechanical designs. There are still a few small details that need to be flushed out, including the mounting screw holes for the top
+					plate, the screw holes for the stepper attachment, the tabs for connecting the bands to hold the device to the arm, and the placement of the potentiometer. Once these small details are worked out, then the design will be ready for testing.
+					We can print small sections of the base to test sizing before we print the entire assembly and then realize that something doesn't fit correctly. Two views of the new design can be seen in figure 25 & 26.
+
+					<!-- Figures -->
+					<li>
+						<figcaption>Figure 25. New Mechanical Design CAD View 1</figcaption>
+						<img src="Team/progress/mrumple/img/week12/mech_view1.png" width="75%"></img>
+					</li>
+					<li>
+						<figcaption>Figure 26. New Mechanical Design CAD View 2</figcaption>
+						<img src="Team/progress/mrumple/img/week12/mech_view2.png" width="75%"></img>
+					</li>
+				</li>
+				<li>
+					<b>RN4020 Bluetooth Chip Protocol</b><br>
+					We are currently desciding whether we want to use the standard RN4020 interface for BLE communication or use the MLDP mode to easily and more quickly interface with the RN4020. I believe that if we can write the host software to correctly
+					interface with the RN4020 while in MLDP mode, that is our best bet to make it easier for the embedded programming side, more efficient, and overall easier to understand. As long as the data is sent over packets (which it should be) MLDP
+					should be the best option for us.
+					
+				</li>
+			</ul>
         </div>
-
-		<!-- Week 11 -->
-		<h4>Week 11:</h4>
-		<b>Date:</b> 10/31/2021<br>
-		<b>Total hours:</b> 20 hours<br>
-		<b>Description of design efforts:</b><br>
-		This week a lot of integration and debugging was done with our DAqS board. After receiving the board on Saturday, Swagat and I spent most of the day working on soldering it together and doing basic electrical testing. Thanks to Swagat's steady hand
-		and good soldering skills, we were able to complete the board by Saturday evening. Once the board was assembled, we also began digital testing over all the major components of the board. This allowed us to isolate and take care of problems one by one.
-
-		<ul>
-			<li>
-				<b>DAqS Board Completetion</b><br>
-				After a day's worth of work, we had completed the DAqS system assembly and had tested out some of the analog and voltage regulation circuits. The analog circuitry as well as the voltage refulation was in working order, which gave us confidence
-				in the rest of the board layout. The digital layouts were slightly less complicated than the analog layout, which is why it was important that the analog layout worked correctly. Overall, we are super happy that the DAqS system appears to be
-				mostly in working order. I will be talking about additional testing of the DAqS board in the following sections.
-
-				<!-- Figures -->
-				<li>
-					<figcaption>Figure 24. Assembled DAqS Board</figcaption>
-					<img src="Team/progress/mrumple/img/week11/Assembled_DAqS.jpg" width="60%"></img>
-				</li>
-			</li>
-			<li>
-				<b>On-Board IMU Debugging</b><br>
-				During the digital testing of the DAqS system, we were successfully able to program the micro, making me extremely happy. Once we were able to program the micro, we started debugging different chips, one at a time. We were actually able to check
-				off one of our preliminary PSSCs for generating haptic feedback using the DAqS and HBmS combined. After demonstrating that PSSC,  we attempted to communicate with the IMU to demonstrate yet another PSSC. Unfortunately, we were unable to get the
-				IMU to respond to our register reads because of an unknown issue. We inspected the solder job on the chip and attempted to determine the cause of the issue. After back tracking through some of the previous issues we had encountered, I remembered
-				that we needed to address the chip initially using I2C so that we could set it to default into SPI mode. I brought this to Isaac and he quickly bit-banged a I2C communication at the beginning of our init phase and it worked! I was very happy about
-				this since I did not want to have to solder the chip again.
-				
-			</li>
-			<li>
-				<b>Mechanical Layout Test</b><br>
-				As one of the last things before Friday, I was able to 3D print a "sillouhette" of our packaging to measure the mounting holes to make sure they fit correctly with the two boards. I also wanted to check cable distancing to make sure we had enough
-				cables that were the right length. The print turned out really great and we now have a pretty good looking test setup if I do say so myself. Next on mechanical design I'd like to finalize where the battery will be mounted, and determine the methods
-				at which we will be attaching the apparatus to the user's arm. I suspect that we will use a hybrid of elastic straps and velcro for achieving this on different sections of the arm. I forgot to take a picture of the setup, but I am leaving a spot for
-				the figure to be placed here, so when I do take a picture I can upload it.
-
-				<!-- Figures -->
-				<li>
-					<figcaption>Figure 25. Mechanical Test-Bench</figcaption>
-					<img src="Team/progress/mrumple/img/week11/mech_test.jpg" width="60%"></img>
-				</li>
-			</li>
-		</ul>
 	</div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
