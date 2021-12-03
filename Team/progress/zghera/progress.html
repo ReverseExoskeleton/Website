@@ -848,6 +848,124 @@ contact course staff.
 			</p>
 			<br>
 
+			<h4>Week 13</h4>
+			<p>
+				<b>Date:</b> 11/12<br>
+				<b>Total hours:</b> 3 + est. 6  hours<br>
+				<b>Description of design efforts:</b><br>
+				I was expecting to return back to campus early this week. However,
+				per my doctors recommendation, I ended up staying home. However, I 
+				have made plans to come back to campus this Sunday to do some bluetooth
+				testing with Isaac.
+				<br><br>
+				In preparation for the Sunday meeting, I did two things to ensure that
+				host-side software is bug free:
+				<ol>
+					<li><b>Finish BleTrainceiver</b><br>
+						As noted last week, the only peice left to finish on the
+						BleTrainceiver was the code for transmitting haptic packets
+						back to the MCU. I finished that function this week (see Fig. 20).
+					</li>
+					<li><b>Test Madgwick Demo in New VR Unity Project</b><br>
+						Although I was unable to return to campus this week, my parents were 
+						able to grab my Arduino and IMU breakout setup when they went up to
+						campus this past weekend. With hardware in hand, I spent a few hours
+						testing and debugging the new unity project using the same Madgwick
+						cube demo from previous weeks. To accomplish this, I wrote a new 
+						function on the Arduino for sending the unscaled IMU values (see
+						Fig. 21). In addition to handling the IMU value scaling, I also abstracted
+						the sensor data that the host will receive from the MCU into a structure.
+						With our current setup, this structure contains both the 3 Vector3s
+						representing the calibrated IMU data as well as a 16-bit value that
+						represents the elbow angle (See Fig. 22). The main bug that I found during
+						testing was the accelerometer and gyroscope scaling values. After
+						observing some odd behavior with the cube demo, I read through the
+						Arduino library code a bit to find that I coppied down the wrong 
+						scale values. After correcting this, everything looks good again!
+					</li>
+				</ol>
+				<br><br>
+				<img src="Team/progress/zghera/img/week13/send-haptic.jpg" style="width:60%;height:60%;">
+				<br>Fig. 20: BleTrainceiver Haptic Feedback Send Function.<br><br>
+				<img src="Team/progress/zghera/img/week13/send-unscaled.jpg" style="width:70%;height:70%;">
+				<br>Fig. 21: Arduino Send Unscaled IMU Data Function.<br><br>
+				<img src="Team/progress/zghera/img/week13/sensor-sample.jpg" style="width:60%;height:60%;">
+				<br>Fig. 22: Sensor Sample Struct Constructor.<br><br>
+				<img src="Team/progress/zghera/img/week13/sensor-scaling.jpg" style="width:60%;height:60%;">
+				<br>Fig. 23: Correct IMU Scaling Constants.<br><br>
+				<br>
+				I plan to spend a few hours with Isaac on Sunday and then a few hours
+				after our meeting to flesh out the shoulder joint and arm-length calibration
+				methods needed to determine the arm joint locations.
+			</p>
+			<br>
+
+
+			<h4>Week 14</h4>
+			<p>
+				<b>Date:</b> 11/28<br>
+				<b>Total hours:</b> ~15 hours<br>
+				<b>Description of design efforts:</b><br>
+				My efforts this week were focused on two software subsystems:
+				sensor fusion and bluetooth communication.
+				<br>
+				<h5>Sensor Fusion</h5>
+				The remaining steps for sensor fusion include the arm joint calibration
+				sequence and arm joint inference. I completed the implementation for both 
+				of these components this week.
+				<br>
+				Arm joint calibration consists of determining the position of the shoulder
+				joint and the length of the user's upper and forearm. The original strategy
+				for doing this involved instructing the user to move their arm in an arc
+				along a specific plane and sampling points along that arc. With multiple
+				points, the perpendicular bisector could be determined for multiple points
+				and the intersections of those lines would give us the shoulder and elbow
+				positions. This strategy was somewhat complex and prone to user error.
+				<br><br>
+				I created a new strategy that involves the user placing their arms in
+				two static poses (See Fig. 24 for an example) to determine the 
+				shoulder position, and then the arm length. With this new strategy, 
+				arm inference is as easy as updating 
+				the transform rotations for the shoulder and elbow joints using the
+				Madgwick filter output (transformed to shoulder coord frame) and 
+				new elbow angle, respectively. See Fig. 25 for a short demo
+				of the transform setup in Unity. For more details, please see
+				the 
+				<a href="https://docs.google.com/document/d/1x1XkzI_yQpbs2ew2pYxwAr0hBD2qGhd-EBrb9sx52KM/edit?usp=sharing">
+					VR Simulation Planning document
+				</a>
+				.
+				<br><br>
+				Now that the code is written, I will start testing with Matthew's 
+				VR hardware first thing this week. Once that is complete, the only
+				outstanding host-software component that needs implemented is a VR scene
+				that extracts force/torque data from physics interactions of the user
+				and objects in VR. This component will be a completed in collaboration
+				between Matthew and I.
+
+				<br><br>
+				<img src="Team/progress/zghera/img/week14/total-arm-length.jpg" style="width:50%;height:50%;">
+				<br>Fig. 24: Diagram to Illustrate Arm Length Calculation.<br><br>
+				
+				<br>
+				<iframe width="700" height="400"
+					src="https://www.youtube.com/embed/qtU2VrsTMMc">
+				</iframe>
+				<br>Fig. 25: Unity Arm Estimation Transforms Setup
+				<br><br>
+
+				<h5>Bluetooth Communication</h5>
+				I also worked a bit with Isaac this week to test the new BleTrainceiver
+				with the MCU. After debugging some issues on the MCU side, we were able
+				to bi-directionally send data. I was also able to properly decode IMU
+				data sent from the MCU to the host as expected. 
+				<br>
+				There are currently some bugs on the MCU side with corrupted IMU values.
+				Once we resolve these, we should be able to replicate the Madgwick demo 
+				using BLE rather than serial.
+			</p>
+			<br>
+
 			<br>
 		</div>
 	

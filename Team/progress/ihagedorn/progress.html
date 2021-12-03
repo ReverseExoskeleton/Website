@@ -220,7 +220,7 @@ contact course staff.
 		<h4>Week 9: </h4>
 		<b>Date: </b> 10/22<br>
 		<b>Total hours: </b> 12<br>
-		<b>Descritpion of design efforts: </b><br>
+		<b>Description of design efforts: </b><br>
 	<br>
 	These past couple weeks our team successfully completed the design review and placed our order for our PCBs. 
 	In addition to helping with PCB planning and finalization/verification, I also worked on integrating some of the larger chunks of the project together including working out the timing operations for our timer interrupts with sampling values and coordinating communication as well as general interrupts for reading and writing using DMA. 
@@ -238,7 +238,7 @@ contact course staff.
                 <h4>Week 10: </h4>
                 <b>Date: </b> 10/29<br>
                 <b>Total hours: </b> 19<br>
-                <b>Descritpion of design efforts: </b><br>
+                <b>Description of design efforts: </b><br>
         <br>
 
 	This week I finished the timer and interrupts integration for sampling the IMU and ADC and configuring the PWM. 
@@ -265,7 +265,7 @@ contact course staff.
                 <h4>Week 11: </h4>
                 <b>Date: </b> 11/5<br>
                 <b>Total hours: </b> 14<br>
-                <b>Descritpion of design efforts: </b><br>
+                <b>Description of design efforts: </b><br>
         <br>
 	
 	This week was a heavy amount of integration and testing on the fully populated PCB, pictured below. 
@@ -289,7 +289,62 @@ contact course staff.
 	<br>
 	<br>
 	The fourth task which is still to be completed over the weekend is confirming that boot sequence is received correctly by the BLE chip and the configurations are correct on the chip.
-
+<br>
+	<br>
+	<h4>Week 12: </h4>
+	<b>Date: </b> 11/12<br>
+	<b>Total hours: </b> 17<br>
+	<b>Description of design efforts: </b><br>
+	<br>
+	This past week we achieved several checkoffs including sampling the ADC and mapping values to an angle (pictured below), generating a PWM signal at varying frequencies to generate haptic feedback, and communicating with the IMU over SPI and graphing the data in a serial plotter. 
+	With these three PSSCs complete, I was ready to begin packaging the sampling of the IMU and ADC into a single interrupt function that is controllable at a specific frequency. 
+	In addition to packaging this data, I also worked on integrating DMA transfers into these functions in order to speed up data processing and remove unnecessary overhead associated with accessing registers and flags. 
+	However, as a result of integrating the DMA into the project I also created a few headaches of my own with handling the interrupts associated with moving the data around.
+	<br><img src="Team/progress/ihagedorn/img/Setup.png" style="width:50%;height:65%;"><br>
+	<br>
+	On the communication end of the project, I worked on redeveloping the UART communication and commanding of the BLE chip from polling commands to interrupts in order to improve the timing and provide an error handling functionality for the Bluetooth during its initialization cycle in case of bad transfers. 
+	This included converting all transmits to interrupts that callback at the end of the transfer and start-up a receive interrupt whose callback contains error processing and handling based on the feedback for the BLE commands. 
+	Additionally, this interrupts will serve the project in another capacity when the BLE chip is in MLDP mode in order to more efficiently handle the buffers and communication between the host computer. 
+	<br>
+	<br>
+	Finally, I worked on reading through some of Zach’s development so that I may step into his role if necessary and continue joint development between the MCU and host computer.
+<br>
+	 <br>
+                <h4>Week 13: </h4>
+                <b>Date: </b> 11/19<br>
+                <b>Total hours: </b> 18<br>
+                <b>Description of design efforts: </b><br>
+        <br>
+	This last week our team faced several adversities due to illnesses, but we were still able to overcome and get another checkoff for our new PSSC of waking the MCU after a stimulating event to the system. 
+	With this checkoff complete, our last check preliminary checkoff is the Bluetooth communication. 
+	<br>
+	<br>
+	To achieve our fourth checkoff, we utilized the previously populated HBmS and an analog event detector which uses filtering addition and subtraction to generate a digital signal for any transient change in the analog value from a potentiometer. 
+	This digital signal was then used as a system wakeup interrupt after the system is put to sleep. 
+	Additionally, the interrupt was used to put the system to sleep after an interrupt is not detected for a certain number of cycles. 
+	<br>
+	<br>
+	Over the course of the week, I worked with Zach to hash out the Bluetooth communication structure (pictured below) and test Bluetooth communication driven by the MCU. 
+	The structure is quite simple; the RN4020 will serve as the server which hosts the memory space for exchange of data between the MCU and host computer. 
+	The MCU writes to one characteristic and reads data from another, each under the same service. 
+	On the other side, the host computer reads from the first characteristic and writes to the other. 
+	This setup allows the MCU to control the data flow. 
+	As the sole data manager, the MCU can keep the data stored on the server up to date much faster than the host computer could. 
+	<br><img src="Team/progress/ihagedorn/img/bluetooth_struct.png" style="width:50%;height:65%;"><br>
+<br>
+	 <br>
+                <h4>Week 14: </h4>
+                <b>Date: </b> 11/28<br>
+                <b>Total hours: </b> 8<br>
+                <b>Description of design efforts: </b><br>
+        <br>
+	This week was shortened by thanksgiving break; however, I did work on developing the dip switch functionality of the embedded software in order to quickly change modes for testing purposes of the separate MCU functionalities such as the SPI/IMU communication, PWM, ADC, or UART/BLE communication. 
+	This was a simple digital decoding software for the various modes and conditional structure based on the decoded value. 
+	In addition, to the dip switch functionality, I also finally began testing on the final packaged design thanks to Matthew’s prototyping over the break (pictured below). 
+	Of the final firmware code, I tested the packaged sampling function (IMU and ADC) with interrupts, the Bluetooth advertisements, and the system wakeup. 
+	Over the course of the next week, I hope to finalize integration testing with Zach and to begin checking off our final PSSCs for the final product.
+	<br><img src="Team/progress/ihagedorn/img/Final.jpg" style="width:50%;height:65%;"><br>
+<br>
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
