@@ -345,6 +345,31 @@ contact course staff.
 	Over the course of the next week, I hope to finalize integration testing with Zach and to begin checking off our final PSSCs for the final product.
 	<br><img src="Team/progress/ihagedorn/img/Final.jpg" style="width:50%;height:65%;"><br>
 <br>
+	 <br>
+                <h4>Week 15: </h4>
+                <b>Date: </b> 12/5<br>
+                <b>Total hours: </b> 23<br>
+                <b>Description of design efforts: </b><br>
+        <br>
+	This past week was mostly integration testing with the host computer and integration testing for the sleep/wake functionality. 
+	<br>
+	<br>
+	Additionally, I worked modifying the haptic feedback updating functions and the Bluetooth error handling abilities. 
+	Before the week started we were able to inconsistently communicate with the host software. 
+	As a result, we decided to add more reliability on the MCU side in order to help isolate any issues. 
+	Therefore, we setup an interrupt based boot sequence for the BLE chip and communication to ensure the data sent over the line to the RN4020 is always consistently available. 
+	This update included overhauling the initialization functions and receiving framework for the MCU. 
+	Additionally, we worked developing a new characteristic to indicate the status of the RevEx device to the host computer i.e. awake or asleep. 
+	<br>
+	<br>
+	Next, I worked on integrating the sleep and wake functions into the main interrupt structure in order to put the device to sleep when motion is no longer detected via the ADC or IMU and wake upon a system interrupt from the elbow joint. 
+	Additionally, I modified the haptic feedback functionality to be more streamline in calculating and adjusting the PWM frequency and duty cycle. 
+	We decided to take this route instead of creating tables for design simplicity. 
+	<br>
+	<br>
+	Finally, this week we successfully demoed the final PSSCs to course staff and were able to demonstrate all functions properly. We will continue development as we prepare for the Spark challenge. 
+	These improvements include adding the DMA to UART transfers, adding reliability to the sleep function, reducing power consumption, and slimming down unnecessary code.  
+	<br><img src="Team/progress/ihagedorn/img/teamPhoto.jpg" style="width:50%;height:65%;"><br>
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->

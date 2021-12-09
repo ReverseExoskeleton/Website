@@ -850,7 +850,7 @@ contact course staff.
 
 			<h4>Week 13</h4>
 			<p>
-				<b>Date:</b> 11/12<br>
+				<b>Date:</b> 11/19<br>
 				<b>Total hours:</b> 3 + est. 6  hours<br>
 				<b>Description of design efforts:</b><br>
 				I was expecting to return back to campus early this week. However,
@@ -904,7 +904,7 @@ contact course staff.
 			<h4>Week 14</h4>
 			<p>
 				<b>Date:</b> 11/28<br>
-				<b>Total hours:</b> ~15 hours<br>
+				<b>Total hours:</b> ~10 hours<br>
 				<b>Description of design efforts:</b><br>
 				My efforts this week were focused on two software subsystems:
 				sensor fusion and bluetooth communication.
@@ -957,14 +957,86 @@ contact course staff.
 				<h5>Bluetooth Communication</h5>
 				I also worked a bit with Isaac this week to test the new BleTrainceiver
 				with the MCU. After debugging some issues on the MCU side, we were able
-				to bi-directionally send data. I was also able to properly decode IMU
-				data sent from the MCU to the host as expected. 
+				to bi-directionally send data.
 				<br>
 				There are currently some bugs on the MCU side with corrupted IMU values.
 				Once we resolve these, we should be able to replicate the Madgwick demo 
 				using BLE rather than serial.
 			</p>
 			<br>
+
+			<h4>Week 15</h4>
+			<p>
+				<b>Date:</b> 12/3<br>
+				<b>Total hours:</b> ~22<br>
+				<b>Description of design efforts:</b><br>
+				My efforts this week were primarily focused on the final PSSC demo.
+				This involved creating a demo simulation and debugging any final issues.
+				Matthew helped me create the scene for the final demo sim. I worked with
+				both Matthew and Isaac to debug a number of issues on both the embedded
+				and host software components.
+				<br><br>
+				Outside of project work, the other deliverable for this week was 
+				Hw 13: ABET Senior Design Report. In addition to the individial section,
+				I also helped write a few sections of team portion of the report.
+				<br>
+				<h5>Final PSSC Demo Simulation</h5>
+				A snapshot of the final demo scene is shown in Fig. 26. Matthew created
+				the majority of the objects in the scene including the arm and the UI
+				elements as well as a C# scene interface. Once this was created, I
+				was able to create a controller class that interacted with the various
+				display and transform setter functions. This was largely adapted from 
+				the controller used by the final VR scene I created last week.
+
+				<br><br>
+				<img src="Team/progress/zghera/img/week15/final-pssc-demo-scene.jpg" style="width:60%;height:60%;">
+				<br>Fig. 26: Final PSSC Demo Scene.<br><br>
+
+				The only major new addition was a recalibration function that allowed
+				us to reset the orientation estimation based on a known starting position
+				of the device.
+				<br><br>
+
+				<h5>Debugging Software Bugs</h5>
+				Isaac, Matthew, and I continued bluetooth testing and found numerous
+				bugs. Here are a few of the most memorable ones that I was involved
+				with solving:
+				<ul>
+					<li><b>Endianness</b> <br>
+						I assumed little endian as ARM processors are typically little
+						endian by default. When looking at the ADC value, I noticed that
+						the least significant byte was set but not the most significant
+						even though we were only using 12 bits. This lead me to the discovery
+						that Isaac was packaging the sensor data in big endian. I switched
+						to big endian and numbers started looking reasonable!
+					</li><br>
+					<li><b>Accelerometer Calibration</b> <br>
+						After solving the endianness problem, I noticed that the acceleration
+						was 2Gs rather than 1G when laying flat on the table. After matthew and 
+						I performed some investigation of the IMU driver code, we found that 
+						they wrote the accelerometer calibration such that it was assumed the 
+						accelerometer was being calibrated in a 0G field. In other words, it
+						did not subtract out 1G for gravity when setting the biases during
+						calibration. After Matthew changed that value, we had reasonable
+						accelerometer and gyroscope values!
+					</li><br>
+					<li><b>Searching for Services and Characteristics</b> <br>
+						The last issue was soely on the host computer. Once the RevEx BLE
+						device was detected, I scanned to make sure the GATT services and
+						characteristics were found as suspected before subscribing to a
+						given characteristic. However, there was an inconsistent issue
+						where no services/characteristics were found during the search.
+						I dug into the c++ source code and found that the queue for new 
+						services was never being filled for some reason. In the interest of
+						time, I removed these checks and immediately subscribe to the
+						appropriate characteristics once the device is found.
+					</li>
+				</ul>
+				Update: We passed all of our final PSSCs in our final demo. The next steps
+				is to prepare a cool demo for the Spark Challenge!
+			</p>
+			<br>
+
 
 			<br>
 		</div>
