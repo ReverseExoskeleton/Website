@@ -483,11 +483,28 @@ contact course staff.
             <b>Date:</b> 12/03/2021<br />
             <b>Total hours:</b> 4 hours<br />
             <b>Description of design efforts:</b><br />
-            This week, I helped write the final senior design report. To make Isaac's code function as expected (i.e. be able to use the analog event detector to determine when to go to sleep) I increased the sensitivity of the analog event detector by increasing the gain of the highpass filter. However, this was shown to result in false positives. Hence, we are waking up using the analog event detector and going to sleep using a software activity detector. Fig. 29 shows the current state of development of the wearable. 
+            This week, I helped write the final senior design report. To make Isaac's code function as expected (i.e. be able to use the analog event detector to determine when to go to sleep) I increased the sensitivity of the analog event detector by increasing the gain of the highpass filter. However, this was shown to result in false positives. Hence, we are waking up using the analog event detector and going to sleep using a software activity detector. Fig. 29 shows the current state of development of the wearable.
 
             <p></p>
             <img src="Team/progress/sbhatta/img/week15/Final.jpg" width="50%" /></img>
             <figcaption>Fig. 29: Ongoing development on the final packaged device. Note the cool new elastic bands.</figcaption>
+            <br />
+
+            <!-- Week 16 -->
+            <h4>Week 16:</h4>
+            <b>Date:</b> 12/08/2021<br />
+            <b>Total hours:</b> 4 hours<br />
+            <b>Description of design efforts:</b><br />
+            This week, I helped make the poster for the SPARK challenge. Additionally, I rectified the calculation for the ARR value for the PWM timer;
+            the PWM frequency previously has significant error, but the duty cycle was correct (we measured the true resistance of the optoelectronic
+            relays vs time using a voltage divider configuration and an oscilloscope). Additionally, I took power measurements for our device using a resistive shunt as a function of time during the transition from the sleep mode to the active state.
+            The power measurements are shown in Fig. 30. In essence, we draw 9.2 mW in our sleep state and 33.2 mW on average in our wake state. The bluetooth module causes our RMS power draw to peak at 40 mW.
+            To be honest, I think we could have gotten the sleep power down to 2 mW, but overall, I am satisfied with our current power draw --
+            our device is still 'state of the art,' and the active power draw is a few milliwatts lower than an implantable device with which I have previously worked.
+
+            <p></p>
+            <img src="Team/progress/sbhatta/img/week16/Power.png" width="60%" /></img>
+            <figcaption>Fig. 30: Wearable power draw as a function of time during the transition from the sleep mode to the active state.</figcaption>
             <br />
 
         </div>
